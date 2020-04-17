@@ -1,4 +1,5 @@
 import { headerLinks } from '../view/header';
+// import { categoryCards } from '../view/mainHome';
 
 let curPage = 'Home';
 
@@ -10,10 +11,7 @@ async function getData() {
 
 export async function getCategories() {
     const data = await getData();
-    const categories = [];
-    data.forEach((e) => {
-        categories.push(e.name);
-    })
+    const categories = data.map((el) => ({ name: el.name, image: el.cards[0].image}));
     return categories;
 }
 
@@ -22,12 +20,33 @@ export function linkClick(event) {
         e.classList.remove('active');
     })
     event.target.classList.add('active');
-    curPage = event.target.textContent;
-    console.log(curPage);
+    setPage(event.target.textContent);
 }
+
+
+function setPage(value) {
+    curPage = value;
+    updatePage(curPage);
+}
+
 
 export async function initialize() {
     const categories = await getCategories();
-    categories.unshift('Home');
-    headerLinks(categories, linkClick);
+    const names = [];
+    categories.forEach(e => names.push(e.name));
+    names.unshift('Home');
+    headerLinks(names, linkClick);
+    // updatePage(curPage, categories)
+}
+
+function updatePage(page) {
+    if(page === 'Home'){
+        // categoryCards(cards);
+    } else {
+        var container = document.querySelector('.cards');
+
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
 }

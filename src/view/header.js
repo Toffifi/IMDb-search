@@ -9,5 +9,5 @@ export function headerLinks(categories, linkClick) {
             linkClick(event)
         });
     })
-    nav.children[0].classList.add('active'); //fix?
+    nav.children[0].classList.add('active');
 }
