@@ -14,13 +14,17 @@ export default class Storage {
   }
 
   setCategories(categories) {
-    this.categories = categories;
-    this.categoriesCallback();
+    if (categories !== this.categories) {
+      this.categories = categories;
+      this.categoriesCallback();
+    }
   }
 
   setCards(cardsArray) {
-    this.cardsArray = cardsArray;
-    this.cardsCallback();
+    if (cardsArray !== this.cardsArray) {
+      this.cardsArray = cardsArray;
+      this.cardsCallback();
+    }
   }
 
   getCardsArray(name) {

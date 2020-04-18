@@ -1,14 +1,15 @@
-import { headerLinks } from '../view/header';
 import { setActiveCategory } from './helpers';
-export default class HeaderController {
+import { categoryCards } from '../view/mainHome'
+
+export default class HomeController {
   constructor(storage) {
       this.storage = storage;
   }
 
-  categoriesChanged() {
-    headerLinks(this.storage.categories, this.linkClick.bind(this));
+  drow() {
+    categoryCards(this.storage.categories.filter(e => e.image));
   }
-
+  
   linkClick(name) {
     const data = setActiveCategory(this.storage.categories, name);
     this.storage.setCategories(data);
