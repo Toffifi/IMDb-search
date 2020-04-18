@@ -20,3 +20,10 @@ export function headerLinks(categories, linkClick) {
         }
     })
 }
+
+export function togglePlay(toogleClick) {
+    const play = document.querySelector('#play_button');
+    const train = document.querySelector('#train_button');
+    play.addEventListener('click', () => toogleClick(true));
+    train.addEventListener('click', () => toogleClick(false));
+}

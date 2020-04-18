@@ -18,5 +18,5 @@ export default async function loadData() {
       image: null,
     },
   ];
-  return { categories, answer };
+  return { categories, cards: answer };
 }

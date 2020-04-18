@@ -2,11 +2,59 @@
     cursor: pointer;
 }
 
-.card{
-    cursor: pointer;
-    img{
-        height: 200px;
-        width: 100%;
-        display: block;
+@mixin size {
+    width: 320px;
+    height: 240px;
+}
+@mixin layout {
+    backface-visibility: hidden; 
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cards{
+    .cards_container{
+        perspective: 1000;
+        margin: 10px;
+        @include size;
+
+        .card{
+            cursor: pointer;
+            height: 200px;
+            transition: 0.6s;
+            transform-style: preserve-3d;            
+            position: relative;
+            
+            .front{
+                @include size;
+                @include layout;
+                z-index: 2;
+            }
+            .back{
+                @include size;
+                @include layout;
+                transform: rotateY(180deg);
+            }
+            .card-header {
+                background: #fff;
+                text-align: center;
+            }
+            .btn{
+                z-index: 5;
+                height: 50px;
+                width: 50px;
+            }
+        }
+        .hover{
+            transform: rotateY(180deg);
+        }
     }
 }
+
+
+ 
+
+ 
+
+ 

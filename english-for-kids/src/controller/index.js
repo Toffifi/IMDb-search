@@ -2,6 +2,7 @@ import { clearCards } from '../view/helpers'
 
 import HeaderController from './header';
 import HomeController from './mainHome';
+import CardsController from './mainCards';
 export default class Controller {
   constructor(storage) {
       this.storage = storage;
@@ -10,23 +11,30 @@ export default class Controller {
   initialize() {
     this.headerController = new HeaderController(this.storage);
     this.homeController = new HomeController(this.storage);
-    this.storage.getData(this.categoriesChanged.bind(this), this.cardsChanged.bind(this));
+    this.cardsController = new CardsController(this.storage);
+    this.storage.getData(this.categoriesChanged.bind(this), this.cardsChanged.bind(this),this.toggleChanged.bind(this));
   }
 
-  categoriesChanged() {
+  categoriesChanged() {    
+    clearCards();
     this.headerController.categoriesChanged();
-    switch (this.storage.categories.find(e => e.active).name) {
+    const page = this.storage.categories.find(e => e.active).name;
+    switch (page) {
         case 'Home':
             this.homeController.drow();
             break;
     
         default:
-            clearCards();
+          this.cardsController.drow(page);
             break;
     }
-  }                                                                        
+  }
 
   cardsChanged() {
     console.log("cards changed!")
+  }
+
+  toggleChanged() {
+    this.cardsController.gameMode();
   }
 }
