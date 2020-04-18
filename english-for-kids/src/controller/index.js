@@ -1,4 +1,5 @@
 import { clearCards } from '../view/helpers'
+import loadData from './service';
 
 import HeaderController from './header';
 import HomeController from './mainHome';
@@ -8,11 +9,14 @@ export default class Controller {
       this.storage = storage;
   }
 
-  initialize() {
+  async initialize() {
     this.headerController = new HeaderController(this.storage);
     this.homeController = new HomeController(this.storage);
     this.cardsController = new CardsController(this.storage);
-    this.storage.getData(this.categoriesChanged.bind(this), this.cardsChanged.bind(this),this.toggleChanged.bind(this));
+    this.storage.addCollbacks(this.categoriesChanged.bind(this), this.cardsChanged.bind(this),this.toggleChanged.bind(this));
+    const { categories, cards } = await loadData();
+    this.storage.setCategories(categories);
+    this.storage.setCards(cards);
   }
 
   categoriesChanged() {    

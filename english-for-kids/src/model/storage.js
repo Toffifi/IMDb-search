@@ -1,17 +1,12 @@
-import loadData from './service'
-
 export default class Storage {
   constructor() {
     this.game = false;
   }
 
-  async getData(categoriesCallback, cardsCallback, toggleChanged) {
+  async addCollbacks(categoriesCallback, cardsCallback, toggleChanged) {
     this.categoriesCallback = categoriesCallback;
     this.cardsCallback = cardsCallback;
     this.toggleChanged = toggleChanged;
-    const { categories, cards } = await loadData();
-    this.setCategories(categories);
-    this.setCards(cards);
   }
 
   setCategories(categories) {
