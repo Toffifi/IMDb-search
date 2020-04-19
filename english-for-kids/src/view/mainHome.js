@@ -5,7 +5,7 @@ export function categoryCards(categories, linkClick) {
     section.appendChild(cards);
     categories.forEach((e) => {
         const card = document.createElement('div');
-        card.className = 'card mb-3';
+        card.className = 'home-card';
         cards.appendChild(card);
         const h3 = document.createElement('h3');
         h3.className = 'card-header';

@@ -1,9 +1,5 @@
-.nav-link{
-    cursor: pointer;
-}
-
 @mixin size {
-    width: 320px;
+    width: 300px;
     height: 240px;
 }
 @mixin layout {
@@ -13,45 +9,120 @@
     left: 0;
 }
 
-.cards{
-    .cards_container{
-        perspective: 1000;
-        margin: 10px;
-        @include size;
+header{
+    position: fixed;
+    width: 99vw;
+    z-index: 50;
 
-        .card{
-            cursor: pointer;
-            height: 200px;
-            transition: 0.6s;
-            transform-style: preserve-3d;            
-            position: relative;
-            
-            .front{
-                @include size;
-                @include layout;
-                z-index: 2;
-            }
-            .back{
-                @include size;
-                @include layout;
-                transform: rotateY(180deg);
-            }
-            .card-header {
-                background: #fff;
-                text-align: center;
-            }
-            .btn{
-                z-index: 5;
-                height: 50px;
-                width: 50px;
-            }
-        }
-        .hover{
-            transform: rotateY(180deg);
-        }
+    .nav-link{
+        cursor: pointer;
     }
 }
+main{
+    padding-top: 80px;
 
+    section {
+
+        .cards{
+            padding: 0 60px;
+        
+            .cards_container{
+                perspective: 1000;
+                margin: 10px;
+                @include size;
+        
+                .card{
+                    cursor: pointer;
+                    height: 200px;
+                    transition: 0.6s;
+                    transform-style: preserve-3d;            
+                    position: relative;
+                    
+                    .front{
+                        @include size;
+                        @include layout;
+                        z-index: 2;
+                    }
+                    .back{
+                        @include size;
+                        @include layout;
+                        transform: rotateY(180deg);
+                    }
+                    .card-header {
+                        background: #fff;
+                        text-align: center;
+                    }
+                    .btn{
+                        z-index: 5;
+                        height: 35px;
+                        width: 35px;
+                        font-size: 14px;
+                        border-radius: 50%;
+                        margin: 4px;
+                        padding: 6px 0;
+        
+                        &:focus{
+                            box-shadow: none;
+                        }
+                    }
+                }
+                .hover{
+                    transform: rotateY(180deg);
+                }
+            }
+        }
+        .start_but{
+            position: fixed;
+            top: calc(100vh - 50px);
+            width: 95vw;
+            right: 1.5vw;
+            z-index: 10;
+            transition: 0.5s;
+            height: 45px;
+        }
+        .repeat{
+            width: 45px;
+            padding: 5px 0;
+            right: 6px;
+        
+            img{
+                width: 35px;
+            }
+        }
+        .stars {
+            z-index: 10;
+            position: fixed;
+            top: 70px;
+            height: calc(100vh - 140px);
+            right: 5px;
+            width: 40px;
+            overflow: hidden;
+            background-color: white;
+            img{
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .fill{
+            height: 70vh;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            text-align: center;
+
+            h3{
+                height: 65vh;
+                font-size: 31px;
+                color: cadetblue;
+                font-weight: 900;
+            }
+            p{
+                font-style: italic;
+            }
+        }
+    }    
+}
 
  
 

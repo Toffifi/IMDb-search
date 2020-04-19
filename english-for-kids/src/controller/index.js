@@ -21,12 +21,13 @@ export default class Controller {
 
   categoriesChanged() {    
     clearCards();
+    this.cardsController.resetGame();
     this.headerController.categoriesChanged();
     const page = this.storage.categories.find(e => e.active).name;
     switch (page) {
         case 'Home':
-            this.homeController.drow();
-            break;
+          this.homeController.drow();
+          break;
     
         default:
           this.cardsController.drow(page);
