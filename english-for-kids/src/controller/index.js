@@ -16,7 +16,7 @@ export default class Controller {
     this.homeController = new HomeController(this.storage);
     this.cardsController = new CardsController(this.storage);
     this.statisticsController = new StatisticsController(this.storage);
-    this.storage.addCollbacks(this.categoriesChanged.bind(this), this.cardsChanged.bind(this),this.toggleChanged.bind(this));
+    this.storage.addCollbacks(this.categoriesChanged.bind(this), this.toggleChanged.bind(this));
     const { categories, cards } = await loadData();
     this.storage.setCategories(categories);
     this.storage.setCards(cards);
@@ -47,10 +47,6 @@ export default class Controller {
           this.cardsController.draw(page);
           break;
     }
-  }
-
-  cardsChanged() {
-    
   }
 
   toggleChanged() {

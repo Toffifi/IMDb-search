@@ -3,9 +3,8 @@ export default class Storage {
     this.game = false;
   }
 
-  async addCollbacks(categoriesCallback, cardsCallback, toggleChanged) {
+  async addCollbacks(categoriesCallback, toggleChanged) {
     this.categoriesCallback = categoriesCallback;
-    this.cardsCallback = cardsCallback;
     this.toggleChanged = toggleChanged;
   }
 
@@ -19,9 +18,9 @@ export default class Storage {
   setCards(cardsArray) {
     if (cardsArray !== this.cardsArray) {
       this.cardsArray = cardsArray;
-      this.cardsCallback();
     }
   }
+  
   setGame(game) {
     if (game !== this.game) {
       this.game = game;
