@@ -14,8 +14,12 @@ export default class CardsController {
 
   draw(page) {
     this.pageData = this.storage.cardsArray.find(e => e.name === page).cards;
-    view.cards(this.pageData, this.linkClick, this.startGame);
-    view.toogleGame(this.storage.game);
+    if (!this.pageData || this.pageData.length === 0) {
+      view.showError()
+    } else {
+      view.cards(this.pageData, this.linkClick, this.startGame);
+      view.toogleGame(this.storage.game);
+    }
   }
 
   gameMode() {

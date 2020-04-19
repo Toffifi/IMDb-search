@@ -1,4 +1,4 @@
-import { getStatsRecord } from './helpers';
+import { getStatsRecord, setActiveCategory } from './helpers';
 import * as view from '../view/statistics'
 export default class StatiscticsController {
   constructor(storage) {
@@ -6,6 +6,7 @@ export default class StatiscticsController {
       this.statsArr = null;
       this.sortArray = this.sortArray.bind(this);
       this.clearStats = this.clearStats.bind(this);
+      this.diffWordsClick = this.diffWordsClick.bind(this);
       this.cols = [
         "category",
         "word",
@@ -22,12 +23,12 @@ export default class StatiscticsController {
 
   draw() {
     this.createStatsArr();
-    view.drawTable(this.statsArr, this.cols, this.sortArray, this.clearStats);
+    view.drawTable(this.statsArr, this.cols, this.sortArray, this.clearStats, this.diffWordsClick);
   }
 
   createStatsArr() {
     this.statsArr = [];
-    this.storage.cardsArray.forEach((e) => {
+    this.storage.cardsArray.filter((e) => e.name !== 'Difficult words').forEach((e) => {
       this.statsArr.push(...e.cards.map((c) => {
         const record = getStatsRecord(c.id);
         return {
@@ -72,9 +73,10 @@ export default class StatiscticsController {
     this.createStatsArr()
     view.redraw(this.statsArr, this.cols);
   }
-  // linkClick(name) {
-  //   //const data = setActiveCategory(this.storage.categories, name);
-  //   this.storage.setCategories(data);
-  // }
+
+  diffWordsClick() {
+    const data = setActiveCategory(this.storage.categories, 'Difficult words');
+    this.storage.setCategories(data);
+  }
   
 }

@@ -26,3 +26,26 @@ export function getStatsRecord(id) {
     }
     return record;
 }
+
+
+export function createDifficultArr(cards) {
+    let arr = [];
+    cards.forEach((e) => {
+        arr.push(...e.cards.map((c) => {
+          const record = getStatsRecord(c.id);
+          return {
+            id: c.id,
+            wrong: record.w,
+          }
+        }))
+    });
+    arr = arr.sort((a, b) => b.wrong - a.wrong).filter(e => e.wrong > 0).slice(0, 8);
+    const result = [];
+    cards.forEach((e) => 
+        result.push(...e.cards.filter(c => 
+            arr.findIndex(a => a.id === c.id) >= 0
+        ))
+    );
+    console.log(result);
+    return result;
+}

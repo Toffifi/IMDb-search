@@ -1,6 +1,6 @@
 const section = document.querySelector('section');
 
-export function drawTable(rows, cols, sortFn, clearStats) {
+export function drawTable(rows, cols, sortFn, clearStats, diffWords) {
   const buttonReset = document.createElement('button');  
   buttonReset.className = 'btn btn-outline-info reset';
   buttonReset.innerHTML = 'Reset';
@@ -13,6 +13,7 @@ export function drawTable(rows, cols, sortFn, clearStats) {
   buttonDif.className = 'btn btn-outline-info reset';
   buttonDif.innerHTML = 'Revise difficult words';
   buttonDif.addEventListener('click', () => {
+    diffWords();
   });
   section.appendChild(buttonDif);
 

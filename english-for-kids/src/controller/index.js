@@ -1,4 +1,5 @@
 import { clearCards } from '../view/helpers'
+import { createDifficultArr } from './helpers'
 import loadData from './service';
 
 import HeaderController from './header';
@@ -33,9 +34,18 @@ export default class Controller {
         case 'Statistics':
           this.statisticsController.draw();
           break;
+        case 'Difficult words': {
+          let difCards = this.storage.cardsArray.find(e => e.name === "Difficult words");
+          difCards.cards = [];
+          const difArr = createDifficultArr(this.storage.cardsArray);
+          difCards.cards = difArr;
+          this.storage.setCards(this.storage.cardsArray);
+          this.cardsController.draw(page);
+          break;
+        }
         default:
           this.cardsController.draw(page);
-            break;
+          break;
     }
   }
 

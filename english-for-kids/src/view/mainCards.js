@@ -160,3 +160,10 @@ function createAudio(id, link, parent) {
     parent.appendChild(audio);
     return audio;
 }
+
+export function showError() {
+    const div = document.createElement('div');
+    // div.className = 'btn btn-primary btn-lg start_but d-none';
+    div.innerHTML = 'There are no words in this set';
+    section.appendChild(div);
+}

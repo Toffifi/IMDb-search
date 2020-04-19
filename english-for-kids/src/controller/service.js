@@ -1,6 +1,10 @@
 export default async function loadData() {
   const response = await fetch("/data.json");
   const answer = await response.json();
+  answer.push({
+    name: "Difficult words",
+    cards: []
+  });
   const categories = [
     {
       name: "Home", 
