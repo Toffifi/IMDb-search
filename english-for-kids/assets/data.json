@@ -365,5 +365,127 @@
                 "audioSrc": "audio/laugh.mp3"
             }
         ]
+    },
+    {
+        "name": "School supplies",
+        "cards":     [
+            {
+                "id": "49",
+                "word": "pencil case",
+                "translation": "пенал",
+                "image": "img/pencil_case.jpg",
+                "audioSrc": "audio/pencil_case.mp3"
+            },
+            {
+                "id": "50",
+                "word": "compass",
+                "translation": "циркуль",
+                "image": "img/compass.jpg",
+                "audioSrc": "audio/compass.mp3"
+            },
+            {
+                "id": "51",
+                "word": "eraser",
+                "translation": "ластик",
+                "image": "img/eraser.jpg",
+                "audioSrc": "audio/eraser.mp3"
+            },
+            {
+                "id": "52",
+                "word": "notebook",
+                "translation": "тетрадь",
+                "image": "img/notebook.jpg",
+                "audioSrc": "audio/notebook.mp3"
+            },
+            {
+                "id": "53",
+                "word": "pen",
+                "translation": "ручка",
+                "image": "img/pen.jpg",
+                "audioSrc": "audio/pen.mp3"
+            },
+            {
+                "id": "54",
+                "word": "pencil",
+                "translation": "карандаш",
+                "image": "img/pencil.jpg",
+                "audioSrc": "audio/pencil.mp3"
+            },
+            {
+                "id": "55",
+                "word": "ruler",
+                "translation": "линейка",
+                "image": "img/ruler.jpg",
+                "audioSrc": "audio/ruler.mp3"
+            },
+            {
+                "id": "56",
+                "word": "scissors",
+                "translation": "ножницы",
+                "image": "img/scissors.jpg",
+                "audioSrc": "audio/scissors.mp3"
+            }
+        ]
+    },
+    {
+        "name": "Food",
+        "cards":     [
+            {
+                "id": "57",
+                "word": "cake",
+                "translation": "торт",
+                "image": "img/cake.jpg",
+                "audioSrc": "audio/cake.mp3"
+            },
+            {
+                "id": "58",
+                "word": "candy",
+                "translation": "конфета",
+                "image": "img/candy.jpg",
+                "audioSrc": "audio/candy.mp3"
+            },
+            {
+                "id": "59",
+                "word": "cherry",
+                "translation": "вишня",
+                "image": "img/cherry.jpg",
+                "audioSrc": "audio/cherry.mp3"
+            },
+            {
+                "id": "60",
+                "word": "cookie",
+                "translation": "печенье",
+                "image": "img/cookie.jpg",
+                "audioSrc": "audio/cookie.mp3"
+            },
+            {
+                "id": "61",
+                "word": "orange",
+                "translation": "апельсин",
+                "image": "img/orange.jpg",
+                "audioSrc": "audio/orange.mp3"
+            },
+            {
+                "id": "62",
+                "word": "pasta",
+                "translation": "макароны",
+                "image": "img/pasta.jpg",
+                "audioSrc": "audio/pasta.mp3"
+            },
+            {
+                "id": "63",
+                "word": "strawberry",
+                "translation": "клубника",
+                "image": "img/strawberry.jpg",
+                "audioSrc": "audio/strawberry.mp3"
+            },
+            {
+                "id": "64",
+                "word": "watermelon",
+                "translation": "арбуз",
+                "image": "img/watermelon.jpg",
+                "audioSrc": "audio/watermelon.mp3"
+            }
+        ]
     }
 ]
