@@ -7,7 +7,7 @@ export default class HomeController {
       this.linkClick = this.linkClick.bind(this)
   }
 
-  drow() {
+  draw() {
     categoryCards(this.storage.categories.filter(e => e.image), this.linkClick);
   }
   

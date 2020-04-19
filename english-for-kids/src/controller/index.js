@@ -4,6 +4,7 @@ import loadData from './service';
 import HeaderController from './header';
 import HomeController from './mainHome';
 import CardsController from './mainCards';
+import StatisticsController from './statistics';
 export default class Controller {
   constructor(storage) {
       this.storage = storage;
@@ -13,6 +14,7 @@ export default class Controller {
     this.headerController = new HeaderController(this.storage);
     this.homeController = new HomeController(this.storage);
     this.cardsController = new CardsController(this.storage);
+    this.statisticsController = new StatisticsController(this.storage);
     this.storage.addCollbacks(this.categoriesChanged.bind(this), this.cardsChanged.bind(this),this.toggleChanged.bind(this));
     const { categories, cards } = await loadData();
     this.storage.setCategories(categories);
@@ -26,11 +28,13 @@ export default class Controller {
     const page = this.storage.categories.find(e => e.active).name;
     switch (page) {
         case 'Home':
-          this.homeController.drow();
+          this.homeController.draw();
           break;
-    
+        case 'Statistics':
+          this.statisticsController.draw();
+          break;
         default:
-          this.cardsController.drow(page);
+          this.cardsController.draw(page);
             break;
     }
   }
