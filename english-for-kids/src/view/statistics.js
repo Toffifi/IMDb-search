@@ -1,25 +1,33 @@
 const section = document.querySelector('section');
 
 export function drawTable(rows, cols, sortFn, clearStats, diffWords) {
+  const butCont = document.createElement('div');
+  butCont.className = 'but_container';
   const buttonReset = document.createElement('button');  
   buttonReset.className = 'btn btn-outline-info reset';
   buttonReset.innerHTML = 'Reset';
   buttonReset.addEventListener('click', () => {
     clearStats();
   });
-  section.appendChild(buttonReset);
+  butCont.appendChild(buttonReset);
 
   const buttonDif = document.createElement('button');  
-  buttonDif.className = 'btn btn-outline-info reset';
+  buttonDif.className = 'btn btn-outline-info revise';
   buttonDif.innerHTML = 'Revise difficult words';
   buttonDif.addEventListener('click', () => {
     diffWords();
   });
-  section.appendChild(buttonDif);
+  butCont.appendChild(buttonDif);
+  section.appendChild(butCont);
+  
+  const tableContainer = document.createElement("div");
+  tableContainer.style.overflow = "auto";
+  section.appendChild(tableContainer);
 
   const table = document.createElement("table");
   table.className = "table table-hover";
-  section.appendChild(table);
+  table.style.minWidth = "600px";
+  tableContainer.appendChild(table);
 
   createHeader(table, cols, sortFn);
 

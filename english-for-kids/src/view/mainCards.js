@@ -30,7 +30,7 @@ export function cards(arr, linkClick, startGame) {
         
         const button = document.createElement('button');
         button.innerHTML = '<i class="fas fa-sync-alt"></i>';
-        button.className = 'btn btn-outline-info';
+        button.className = 'btn btn-info';
         button.addEventListener('click', () => {
             container.classList.add('hover');
             card.style.transform = 'rotateY(180deg)';
@@ -62,7 +62,7 @@ export function playAudio(id) {
 }
 
 export function toogleGame(game) {
-    const cardHeader = document.querySelectorAll('.card-header, .btn-outline-info');
+    const cardHeader = document.querySelectorAll('.card-game-header, .btn-info');
     if(game) {
         cardHeader.forEach((e) => {
             e.classList.add('d-none');
@@ -85,18 +85,24 @@ export function toogleGame(game) {
 
 function cardLayout(word, classN, image, card, linkClick, id) {
     const div = document.createElement('div');
-    div.style.backgroundImage = `url(${image})`;
-    const header = document.createElement('div');
-    header.className = 'card-header';
     div.className = classN;
-    header.innerHTML = word;
-    card.appendChild(div);
-    div.appendChild(header);
     if(classN === 'front') {
         div.addEventListener('click', () => {
             linkClick(id)
         });
     }
+    card.appendChild(div);
+
+    const header = document.createElement('div');
+    header.className = 'card-header card-game-header';
+    header.innerHTML = word;
+    div.appendChild(header);
+
+    const img = document.createElement('div');
+    img.className = "card-image";
+    img.style.backgroundImage = `url(${image})`;
+    div.appendChild(img);
+
 }
 
 export function proceedAnswer(right, id) {
@@ -163,7 +169,6 @@ function createAudio(id, link, parent) {
 
 export function showError() {
     const div = document.createElement('div');
-    // div.className = 'btn btn-primary btn-lg start_but d-none';
     div.innerHTML = 'There are no words in this set';
     section.appendChild(div);
 }

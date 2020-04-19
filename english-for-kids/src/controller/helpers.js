@@ -46,6 +46,5 @@ export function createDifficultArr(cards) {
             arr.findIndex(a => a.id === c.id) >= 0
         ))
     );
-    console.log(result);
     return result;
 }

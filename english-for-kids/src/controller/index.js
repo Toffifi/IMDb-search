@@ -50,7 +50,7 @@ export default class Controller {
   }
 
   cardsChanged() {
-    console.log("cards changed!")
+    
   }
 
   toggleChanged() {

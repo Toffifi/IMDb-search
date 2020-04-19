@@ -1,28 +1,150 @@
 @mixin size {
     width: 300px;
     height: 240px;
+    @media (max-width: 630px) {
+        width: 200px;
+        height: 160px;
+    }
 }
 @mixin layout {
     backface-visibility: hidden; 
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
+    flex-direction: column
 }
 
 header{
+    background-color: #158CA1;
+    border-bottom: #127ba3 solid 6px;
     position: fixed;
-    width: 99vw;
-    z-index: 50;
-
-    .nav-link{
+    width: 100vw;
+    z-index: 1000;
+}
+.logo{
+    color: white;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 100% 30%;
+    padding-left: 60px;
+}
+nav {
+    overflow: auto;
+    li{
+        color: white;
+        font-size: 20px;
         cursor: pointer;
+    }
+}
+.burger-open {
+    transform: rotate(90deg);
+}
+.blurOpen {    
+    z-index: 450 !important; 
+    background-color: rgba(0,0,0,0.4) !important;
+    transition: z-index 0.6s step-start, background-color 0.6s linear !important;
+}
+
+.close {
+    color: #666D89;
+    font-weight: bold;
+    padding: 2px 9px;
+    margin: 15px;
+    border: 2px solid #666D89;
+}
+.close:hover, .close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+#blur {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0,0,0,0);
+    transition: z-index 0.6s step-end, background-color 0.6s linear;
+}
+.burger {
+    position: fixed;
+    left: 20px;
+    top: 17px;
+    display: flex;
+    font-size: 29px;
+    justify-content: center;
+    color: white;
+    transition: transform 0.3s ease-out;
+    z-index: 1000;
+    cursor: pointer;
+}
+.head {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: grid;
+    grid-template-rows: 70px calc(100vh - 70px);
+    margin: 0;
+    height: 70px;
+    background-color: #158CA1;
+    width: 100%;
+    min-width: 320px;
+    overflow: hidden;
+    justify-content: center;        
+    transition: height 0.3s linear, width 0.3s linear 0.3s;
+}    
+.bmOpen {
+    width: 365px !important;
+    height: 100vh !important;
+    transition: width 0.3s linear, height 0.3s linear 0.3s !important;
+}
+.background {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 71px;
+    width: 100%;
+    background-color: #158CA1;
+    z-index: 400;
+}
+.link-active {
+    font-weight: 900;
+}
+#navbar {
+    li:hover {
+        font-weight: 700;
     }
 }
 main{
     padding-top: 80px;
+    height: 100vh;
 
     section {
+        .home-card{
+            margin: 20px;
+            cursor: pointer;
+            border: #127ba3 solid 2px;
+            &:hover {
+                transform: scale(1.05);
+                transition: 0.5s;
+              }
+              .card-header {
+                background: #158CA1;
+                text-align: center;
+                border-bottom: #127ba3 solid 2px;
+                border-radius: unset;
+                font-weight: 600;
+                color: white;
+            }
+            img{
+                width: 300px;
 
+            }
+        }
         .cards{
             padding: 0 60px;
         
@@ -30,6 +152,7 @@ main{
                 perspective: 1000;
                 margin: 10px;
                 @include size;
+
         
                 .card{
                     cursor: pointer;
@@ -37,29 +160,52 @@ main{
                     transition: 0.6s;
                     transform-style: preserve-3d;            
                     position: relative;
+                    @include size;
                     
                     .front{
                         @include size;
                         @include layout;
-                        z-index: 2;
+                        z-index: 2;                        
+                        border: #127ba3 solid 2px;
+                        background-size: cover;
+                        &:hover{
+                            box-shadow: 0px 0px 24px 1px rgba(16,106,140,1);
+                            transition: 0.5s;
+                        }
                     }
                     .back{
                         @include size;
                         @include layout;
-                        transform: rotateY(180deg);
+                        transform: rotateY(180deg);                        
+                        border: #127ba3 solid 2px;
+                        background-size: cover;
+                    }
+                    .card-image {
+                        flex: 1 1 auto;
+                        background-size: cover;
+                        background-position: center;
                     }
                     .card-header {
-                        background: #fff;
+                        background: #158CA1;
                         text-align: center;
+                        border-bottom: #127ba3 solid 2px;
+                        border-radius: unset;
+                        font-size: 21px;
+                        height: 45px;
+                        overflow: hidden;
+                        padding: 5px;
+                        color: white;
                     }
                     .btn{
+                        color: white;
                         z-index: 5;
-                        height: 35px;
-                        width: 35px;
+                        height: 33px;
+                        width: 34px;
                         font-size: 14px;
-                        border-radius: 50%;
                         margin: 4px;
-                        padding: 6px 0;
+                        padding: 5px 0;
+                        margin-left: 8px;
+                        margin-top: 7px;
         
                         &:focus{
                             box-shadow: none;
@@ -92,7 +238,7 @@ main{
         .stars {
             z-index: 10;
             position: fixed;
-            top: 70px;
+            top: 83px;
             height: calc(100vh - 140px);
             right: 5px;
             width: 40px;
@@ -121,9 +267,22 @@ main{
                 font-style: italic;
             }
         }
+        .but_container{
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 85px;
+        }
     }    
 }
-
+@media (max-width: 630px) {
+    h1{
+        width: 0;
+        display: none;
+    }
+    .home-card img {
+        width: 250px;
+    }
+}
  
 
  
