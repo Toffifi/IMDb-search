@@ -1,12 +1,13 @@
 export default class View{
-    constructor(data){
+    constructor(data, getLevel){
         this.data = data;
+        this.getLevel = getLevel;
     }
     
     init(){
         // console.log(this.data)
-        // document.querySelector('main').style.backgroundImage = `url('${this.data[0].image}')`;
-        // document.querySelector('main').innerHTML = this.data[0].translation;
+        // document.querySelector('.img').style.backgroundImage = `url('${this.data[0].image}')`;
+        // document.querySelector('.word').innerHTML = this.data[0].translation;
         this.headerButton()
     }
 
@@ -18,6 +19,8 @@ export default class View{
                     i.classList.remove('active');
                 })
                 event.target.classList.add('active');
+                this.getLevel(e.id);
+                // console.log(e.id, e)
             })
         })
     }

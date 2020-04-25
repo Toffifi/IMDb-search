@@ -1,4 +1,5 @@
-import init from "./controller/index";
+import Controller from "./controller/index";
 import './style.scss'
 
-init();
+const controller = new Controller;
+controller.init();
