@@ -1,18 +1,59 @@
-.level-btn {
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    padding: 8px 10px 5px 10px;
-    text-decoration: none;
-    color: #FFA000;
-    background: #fff1da;
-    border-bottom: solid 4px #FFA000;
-    border-radius: 15px 15px 0 0;
-    transition: .4s;
-    cursor: pointer;
+body{
+    height: 96vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Lato', sans-serif;
+
+    header div{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .level-btn {
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 8px 25px;
+            text-decoration: none;
+            color: #FFA000;
+            background: #fff1da;
+            border-bottom: solid 4px #FFA000;
+            border-radius: 5px 5px 0 0;
+            transition: .4s;
+            cursor: pointer;
+        }
+        
+        .active, .level-btn:hover {
+            background: #ffc25c;
+            color: #FFF;
+            padding: 8px 30px;
+            border-bottom: solid 4px #ffc25c;
+        }
+    }
+
+    main{
+        height: 90%;
+        display: grid;
+        grid-template-rows: 50% 40% 10%;
+
+        .title{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+
+            .img{
+                height: 260px;
+                width: 390px;
+                border-radius: 15px;
+            }
+            .word{
+                text-align: center;
+            }
+        }
+        .word{
+        }
+        .buttons{
+            display: flex;
+        }
+    }
 }
 
-.active, .level-btn:hover {
-    background: #ffc25c;
-    color: #FFF;
-}
