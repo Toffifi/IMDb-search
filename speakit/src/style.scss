@@ -1,9 +1,8 @@
 @mixin button {
     text-decoration: none;
-    color: #FFA000;
-    background: #fff1da;
-    border-bottom: solid 4px #FFA000;
-    border-radius: 5px 5px 0 0;
+    color: #fff;
+    background: #4baf98;
+    border-bottom: solid 4px #238e85;
     transition: .4s;
     cursor: pointer;
 }
@@ -17,6 +16,8 @@ body{
     max-width: 1200px;
     margin: 0 auto;
     font-family: 'Lato', sans-serif;
+    position: relative;
+    border: 1px solid white;
 
     header div{
         display: grid;
@@ -29,6 +30,9 @@ body{
         p{
             text-align: right;
             padding-right: 20px;
+            text-shadow: 2px 1px 0px rgba(0, 0, 0, 0.2);
+            font-weight: 900;
+            color: #1c726b;
         }
 
         ul{
@@ -44,10 +48,8 @@ body{
             }
             
             .active, .level-btn:hover {
-                background: #ffc25c;
-                color: #FFF;
+                background: #238e85;
                 padding: 8px 30px;
-                border-bottom: solid 4px #ffc25c;
             }            
         }
     }
@@ -130,18 +132,17 @@ body{
             justify-content: space-around;
             div{
                 @include button;
-                padding: 8px 25px;
+                padding: 10px 135px;
+                font-size: 30px;
                 &:hover {
-                    background: #ffc25c;
-                    color: #FFF;
-                    padding: 8px 30px;
-                    border-bottom: solid 4px #ffc25c;
+                    background: #238e85;
+                    padding: 10px 150px;
                 }
             }
         }
         .arrows{
             font-size: 33px;
-            color: #CA4549;
+            color: #238e85;
             position: relative;
             cursor: pointer;
 
@@ -157,6 +158,47 @@ body{
                 right: -45px;
             }
 
+        }
+    }
+    .modal{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url(/files/bg.png);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+        transition: .5s;
+        background-size: cover;
+
+        h1{
+            font-size: 40px;
+            color: #6cffde;
+            opacity: .8;
+            letter-spacing: 13px;
+            font-weight: 300;
+        }
+        p{
+            font-size: 21px;
+            line-height: 2;
+            font-weight: 300;
+            color: #fff;
+            opacity: .8;
+        }
+        div{
+            @include button;
+            padding: 10px 50px;
+            font-size: 30px;
+            margin-top: 50px;
+            &:hover {
+                background: #238e85;
+                padding: 10px 70px;
+            } 
         }
     }
 }

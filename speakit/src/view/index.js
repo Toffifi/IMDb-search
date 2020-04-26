@@ -6,7 +6,8 @@ export default class View{
     }
     
     init(first){
-        if (first) {            
+        if (first) {
+            this.start()
             this.headerButton()
             this.arrowFunc()
         }
@@ -61,6 +62,14 @@ export default class View{
         })
         left.addEventListener('click', () => {
             this.getPage(false);
+        })
+    }
+
+    start(){
+        const btn = document.querySelector('.start');
+        const modal = document.querySelector('.modal');
+        btn.addEventListener('click', () => {
+            modal.style.display = 'none';
         })
     }
 }
