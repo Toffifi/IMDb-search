@@ -24,7 +24,6 @@ export default async function getData(page, group, second) {
 
     await Promise.all(promises)
         .then(r => data.forEach((e, i) => e.translation = r[i].text[0]));
-    
     return data;
 }
 

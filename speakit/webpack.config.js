@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -40,9 +40,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      minify: false
     }),
-    // new CopyPlugin([
-    //   { from: './files', to: path.resolve(__dirname, 'dist/files') }
-    // ]),
+    new CopyPlugin([
+      { from: './files', to: path.resolve(__dirname, 'dist/files') }
+    ]),
   ]
 };
