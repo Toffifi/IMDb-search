@@ -1,3 +1,122 @@
 body{
     font-family: 'Raleway', sans-serif;
+    height: 100vh;
+
+    header{
+        height: 10%;
+        display: flex;
+        justify-content: space-around;
+        background-color: #1f1f1f;
+        color: white;
+    }
+    main{
+        height: 80%;
+        background-color: #141414;
+
+        .search-section{
+            padding: 15px;
+        }
+    }
+    footer{
+        height: 10%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #1f1f1f;
+        color: white;
+        font-size: 18px;
+
+        a{
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+
+            span{
+                color: white !important;
+            }
+            
+            &:hover{
+                color: #4285f4;
+            }
+
+        }
+    }
+}
+.search{
+    background: #fff;
+    display: flex;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    height: 39px;
+    width: 690px;
+    border-radius: 24px;
+    height: 44px;
+    margin: 0 auto;    
+    transition: 0.5s;
+    &:hover{
+        box-shadow: 0 1px 6px 0 rgba(66,133,244,1);
+        border-color: rgba(223,225,229,0);
+    }
+    &>div{
+        flex: 1;
+        display: flex;
+        padding: 5px 4px 0 16px;
+        padding-left: 14px;
+
+        input{
+            background-color: transparent;
+            border: none;
+            margin: 0;
+            padding: 0;
+            color: rgba(0,0,0,.87);
+            word-wrap: break-word;
+            outline: none;
+            display: flex;
+            flex: 100%;
+            -webkit-tap-highlight-color: transparent;
+            height: 34px;
+            font-size: 16px;
+        }
+        div{
+            display: flex;
+            flex: 0 0 auto;
+            margin-top: -5px;
+            align-items: stretch;
+            flex-direction: row;
+
+            button{
+                display: flex;
+                flex: 1 0 auto;
+                cursor: pointer;
+                align-items: center;
+                border: 0;
+                background: transparent;
+                outline: none;
+                padding: 0 8px;
+                color: #80868b;
+                font-size: 20px;
+            }
+            span{
+                border-left: 1px solid #dfe1e5;
+                height: 65%;
+                display: flex;
+                align-self: center;
+            }
+        }
+    }
+}
+.search-button{
+    height: 44px;
+    width: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex: 0 0 auto;
+    padding: 0;
+    background: none;
+    color: #4285f4;
+
+    &:focus {
+        outline: none;
+    }
 }
