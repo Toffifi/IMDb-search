@@ -1,3 +1,12 @@
+function togleButton(pressedKeys, pressed) {
+  pressedKeys.forEach((k) => {
+    if (pressed) {
+      k.ref.classList.add('active');
+    } else {
+      k.ref.classList.remove('active');
+    }
+  });
+}
 class keyboardDriver {
   initialize(keys, inputChar, clearPressed) {
     this.keys = keys;
@@ -29,21 +38,11 @@ class keyboardDriver {
     });
   }
 
-  togleButton(pressedKeys, pressed) {
-    pressedKeys.forEach((k) => {
-      if (pressed) {
-        k.ref.classList.add('active');
-      } else {
-        k.ref.classList.remove('active');
-      }
-    });
-  }
-
   getKey(id, pressed) {
     const pressedKeys = this.keys.filter((k) => k.id === id
       || `${id}_l` === k.id || `${id}_r` === k.id);
 
-    this.togleButton(pressedKeys, pressed);
+    togleButton(pressedKeys, pressed);
 
     return pressedKeys.length ? pressedKeys[0] : null;
   }

@@ -1,6 +1,6 @@
 export function shiftPressed(pressed, isMouse) {
   if (!isMouse) {
-    if (this.shift != pressed) {
+    if (this.shift !== pressed) {
       this.shift = pressed;
       this.setState();
       if (!pressed) {
@@ -23,11 +23,12 @@ export function shiftPressed(pressed, isMouse) {
       elements.forEach((e) => e.ref.classList.remove('active'));
     }
   }
+  return null;
 }
 
 export function altPressed(pressed, isMouse) {
   if (!isMouse) {
-    if (this.alt != pressed) {
+    if (this.alt !== pressed) {
       this.alt = pressed;
       if (!pressed && this.shift) {
         this.setLanguage();
@@ -46,6 +47,7 @@ export function altPressed(pressed, isMouse) {
       elements.forEach((e) => e.ref.classList.remove('active'));
     }
   }
+  return null;
 }
 
 export function ctrlPressed(pressed, isMouse) {
@@ -62,6 +64,7 @@ export function ctrlPressed(pressed, isMouse) {
       elements.forEach((e) => e.ref.classList.remove('active'));
     }
   }
+  return null;
 }
 
 export function capsPressed(element, pressed) {
@@ -137,19 +140,8 @@ export function rightPressed(pressed) {
   }
 }
 
-export function upPressed(pressed) {
-  if (pressed) {
-    this.setFocus(GetCursorPos(true, this.input, this.charWidth));
-  }
-}
-
-export function downPressed(pressed) {
-  if (pressed) {
-    this.setFocus(GetCursorPos(false, this.input, this.charWidth));
-  }
-}
-
-function GetCursorPos(up, input, charWidth) {
+function GetCursorPos(up, field, charWidth) {
+  const input = field;
   if (input.value.length === 0) {
     return 0;
   }
@@ -160,8 +152,8 @@ function GetCursorPos(up, input, charWidth) {
   let cursor = 0;
   let startRow = null;
   let beginChar = 0;
-  for (let i = 0; i < input.value.length; i++) {
-    cursor++;
+  for (let i = 0; i < input.value.length; i += 1) {
+    cursor += 1;
     if (i === start) {
       startRow = arr.length;
       beginChar = cursor;
@@ -200,7 +192,7 @@ function GetCursorPos(up, input, charWidth) {
     } else {
       newPos += (arr[startRow].len - beginChar) + arr[startRow + 1].len;
       if ((startRow + 1 === arr.length - 1) && !arr[startRow + 1].enter) {
-        newPos++;
+        newPos += 1;
       }
     }
   }
@@ -214,4 +206,16 @@ function GetCursorPos(up, input, charWidth) {
     input.scrollTop += (44);
   }
   return newPos;
+}
+
+export function upPressed(pressed) {
+  if (pressed) {
+    this.setFocus(GetCursorPos(true, this.input, this.charWidth));
+  }
+}
+
+export function downPressed(pressed) {
+  if (pressed) {
+    this.setFocus(GetCursorPos(false, this.input, this.charWidth));
+  }
 }

@@ -26,43 +26,44 @@ class Keyboadrd {
 
   initialize() {
     keys.forEach((key) => {
+      const currentKey = key;
       const div = document.createElement('div');
 
       div.className = 'keyboard-button';
-      div.id = key.id;
+      div.id = currentKey.id;
       div.style.flexBasis = `calc(100% / 15.5 * ${key.size} - 0.4%)`;
 
-      key.ref = div;
+      currentKey.ref = div;
 
       this.keyboard.appendChild(div);
 
-      if (key.func) {
-        if (key.id === 'lang') {
-          div.innerHTML = `<p>${key.name[this.lang]}</p>`;
+      if (currentKey.func) {
+        if (currentKey.id === 'lang') {
+          div.innerHTML = `<p>${currentKey.name[this.lang]}</p>`;
         } else {
-          div.innerHTML = `<p>${key.name}</p>`;
+          div.innerHTML = `<p>${currentKey.name}</p>`;
         }
         div.addEventListener('mousedown', (event) => {
           event.preventDefault();
           this.prevPressedKeys = this.pressedKeys;
-          this.pressedKeys = key.func(true, true);
+          this.pressedKeys = currentKey.func(true, true);
         });
         div.addEventListener('mouseup', (event) => {
           event.preventDefault();
-          key.func(false, !this.prevPressedKeys);
-          this.clearPressed(true, key);
+          currentKey.func(false, !this.prevPressedKeys);
+          this.clearPressed(true, currentKey);
         });
       } else {
         div.addEventListener('mousedown', (event) => {
           event.preventDefault();
-          this.inputChar(key);
-          this.clearPressed(false, key);
+          this.inputChar(currentKey);
+          this.clearPressed(false, currentKey);
         });
-        if (key.name[this.lang].double) {
+        if (currentKey.name[this.lang].double) {
           div.className = 'keyboard-button_double';
-          this.doubleKeys(key);
+          this.doubleKeys(currentKey);
         } else {
-          div.innerHTML = `<p>${key.name[this.lang][this.state]}</p>`;
+          div.innerHTML = `<p>${currentKey.name[this.lang][this.state]}</p>`;
         }
       }
     });
@@ -114,18 +115,19 @@ class Keyboadrd {
   }
 
   doubleKeys(key) {
-    key.ref.innerHTML = '';
+    const doubleKey = key;
+    doubleKey.ref.innerHTML = '';
 
     const one = document.createElement('p');
-    one.innerHTML = key.name[this.lang].normal;
+    one.innerHTML = doubleKey.name[this.lang].normal;
     one.className = 'act';
 
     const two = document.createElement('p');
-    two.innerHTML = key.name[this.lang].shifted;
+    two.innerHTML = doubleKey.name[this.lang].shifted;
     two.className = 'passive';
 
-    key.ref.appendChild(one);
-    key.ref.appendChild(two);
+    doubleKey.ref.appendChild(one);
+    doubleKey.ref.appendChild(two);
 
     if (this.state === 'shifted') {
       two.classList.add('selected');

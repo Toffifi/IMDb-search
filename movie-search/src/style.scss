@@ -36,7 +36,7 @@ body{
             }
             
             &:hover{
-                color: #4285f4;
+                color: #038487;
             }
 
         }
@@ -85,6 +85,7 @@ body{
             flex-direction: row;
 
             button{
+                height: 100%;
                 display: flex;
                 flex: 1 0 auto;
                 cursor: pointer;
@@ -114,9 +115,23 @@ body{
     flex: 0 0 auto;
     padding: 0;
     background: none;
-    color: #4285f4;
+    color: #038487;
 
     &:focus {
         outline: none;
     }
+}
+.keyboard-container{
+    position: fixed;
+    height: 0;
+    z-index: 99;
+    bottom: 0px;
+    overflow: hidden;
+    transition: ease 0.5s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.active-keyboard{
+    height: 280px;
 }
