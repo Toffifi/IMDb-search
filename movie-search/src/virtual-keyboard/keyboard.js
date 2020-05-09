@@ -3,12 +3,12 @@ import * as keyFunc from './keyFunc';
 
 
 class Keyboadrd {
-  constructor(input, keyboard, keyboardDriver) {
+  constructor(input, keyboard, keyboardDriver, enterCallback) {
     this.input = input;
     this.keyboard = keyboard;
     this.keyboardDriver = keyboardDriver;
     this.keys = keys;
-    this.bindFunc();
+    this.bindFunc(enterCallback);
     this.lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en';
     this.state = 'normal';
 
@@ -176,7 +176,7 @@ class Keyboadrd {
     }
   }
 
-  bindFunc() {
+  bindFunc(enterCallback) {
     this.keys.forEach((e) => {
       switch (e.id) {
         case 'lang':
@@ -210,7 +210,7 @@ class Keyboadrd {
           e.func = keyFunc.delPressed.bind(this);
           break;
         case 13:
-          e.func = keyFunc.enterPressed.bind(this);
+          e.func = keyFunc.enterPressed.bind(this, enterCallback);
           break;
         case 9:
           e.func = keyFunc.tabPressed.bind(this);

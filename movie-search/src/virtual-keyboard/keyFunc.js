@@ -113,9 +113,10 @@ export function delPressed(pressed) {
   }
 }
 
-export function enterPressed(pressed) {
+export function enterPressed(callback, pressed) {
   if (pressed) {
     this.inputChar(null, '\n');
+    callback();
   }
 }
 
