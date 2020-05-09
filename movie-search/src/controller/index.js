@@ -4,18 +4,32 @@ import * as view from '../view';
 export default class Controller {
   constructor() {
     this.search = '';
+    this.translated = false;
     this.model = new Model();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   init() {
-    view.bindEventHandler(this.doTheSearch.bind(this));
+    view.initView(this.doTheSearch.bind(this));
   }
 
   async doTheSearch() {
-    this.search = view.getSearchValue();
-    const data = await this.model.loadData(this.search, 1, 'movie', '');
-    console.log(this.search);
-    console.log(data);
+    try {
+      await this.checkLanguage();
+      const data = await this.model.loadData(this.search, 1, 'movie', '');
+      console.log(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async checkLanguage() {
+    const text = view.getSearchValue();
+    if (text.match(/[а-яА-Я]/g)) {
+      this.search = await this.model.getTranslation(text);
+      this.translated = true;
+    } else {
+      this.search = text;
+      this.translated = false;
+    }
   }
 }
