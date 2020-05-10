@@ -10,11 +10,16 @@ export function getSearchValue() {
 
 function openKeyboard() {
   const keyboardButton = document.querySelector('#open-keyboard');
+  const keyboardContainer = document.querySelector('.keyboard-container');
+  const input = document.querySelector('#search-input');
+  keyboardContainer.addEventListener('click', () => {
+    input.focus();
+  });
 
   keyboardButton.addEventListener('click', () => {
-    const keyboardContainer = document.querySelector('.keyboard-container');
     keyboardContainer.classList.toggle('active-keyboard');
     keyboardButton.classList.toggle('active');
+    input.focus();
   });
 }
 
@@ -63,6 +68,20 @@ export function setInfo(message) {
 export function setError(error) {
   const errorEl = document.querySelector('#p-error');
   errorEl.innerHTML = error;
+}
+
+export function toogleSpinner(add) {
+  const container = document.querySelector('.swiper-container');
+  let spinnerBackEl = document.querySelector('.spinner-background');
+  if (!spinnerBackEl && add) {
+    spinnerBackEl = document.createElement('div');
+    spinnerBackEl.classList.add('spinner-background');
+    spinnerBackEl.innerHTML = '<div class="spinner-element"></div>';
+    container.prepend(spinnerBackEl);
+  }
+  if (spinnerBackEl && !add) {
+    container.removeChild(spinnerBackEl);
+  }
 }
 
 export function toggleActiveFavButton() {

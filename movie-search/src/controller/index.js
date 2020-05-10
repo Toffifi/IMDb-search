@@ -25,12 +25,13 @@ export default class Controller {
     try {
       await this.createCards(0);
     } catch (error) {
-      view.setError(error.message);
+      this.showError(error.message);
+      view.toogleSpinner(false);
     }
   }
 
   async doTheSearch() {
-    const text = view.getSearchValue();
+    const text = view.getSearchValue().trim();
     if (!text) {
       return;
     }
@@ -44,17 +45,21 @@ export default class Controller {
       await this.checkLanguage(text);
       await this.createCards(0);
     } catch (error) {
-      view.setError(error.message);
+      this.showError(error.message);
+      view.toogleSpinner(false);
     }
   }
 
   async createCards(page) {
+    if (page === 0) {
+      view.toogleSpinner(true);
+    }
     const { data, total } = !this.showFavorite
       ? await this.model.loadData(this.search, page + 1, 'movie', this.year)
       : await this.model.loadFavFilms(page);
     if (page === 0) {
       this.slider.clearSlides();
-      this.totalPages = Math.floor(total / 10);
+      this.totalPages = Math.floor((total - 1) / 10);
       this.lastPage = 0;
     }
     data.forEach((el) => {
@@ -62,6 +67,7 @@ export default class Controller {
       const card = view.createCrad(el, this.setFavFilm, isFav);
       this.slider.appendSlide(card);
     });
+    view.toogleSpinner(false);
   }
 
   async checkLanguage(text) {
@@ -83,7 +89,11 @@ export default class Controller {
   loadNextPage(curentPage) {
     if (curentPage + 1 <= this.totalPages && this.lastPage < curentPage + 1) {
       this.lastPage = curentPage + 1;
-      this.createCards(this.lastPage);
+      try {
+        this.createCards(this.lastPage);
+      } catch (error) {
+        this.showError(error.message);
+      }
     }
   }
 
@@ -110,7 +120,38 @@ export default class Controller {
     try {
       await this.createCards(0);
     } catch (error) {
-      view.setError(error.message);
+      this.showError(error.message);
+      view.toogleSpinner(false);
+    }
+  }
+
+  showError(message) {
+    view.setInfo('');
+    switch (message) {
+      case 'Too many results.':
+        view.setInfo(`Too many results for <i>"${this.search}"</i>
+          ${this.year ? ` year ${this.year}` : ''}. 
+          Specify your request.`);
+        break;
+      case 'Movie not found!':
+        view.setInfo(`No results for <i>"${this.search}"</i>
+          ${this.year ? ` year ${this.year}` : ''}.`);
+        break;
+      case 'yandex_unauthorized':
+        view.setError('Yandex translate api key error. Contact developer for the new api key');
+        break;
+      case 'yandex_error':
+        view.setError('Yandex translate api error. Contact developer or try again later.');
+        break;
+      case 'imdb_unauthorized':
+        view.setError('IMDB api key error. Contact developer for the new api key');
+        break;
+      case 'imdb_error':
+        view.setError('IMDB api error. Contact developer or try again later.');
+        break;
+      default:
+        view.setError(`Unknown error: ${message}`);
+        break;
     }
   }
 }

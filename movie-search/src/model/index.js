@@ -1,7 +1,7 @@
 export default class Model {
   constructor() {
     this.url = 'http://www.omdbapi.com/';
-    this.apiKey = '834cd224';
+    this.apiKey = '609315d8';
     this.yandexKey = 'trnsl.1.1.20200509T102006Z.38b830ac3f910bf1.c10d8359cc871ff373c03a4a8c0783e6f47e58b5';
     this.favFilms = [];
     this.getFavFilms();
@@ -30,7 +30,7 @@ export default class Model {
     try {
       searchResponse = await fetch(`${this.url}?apikey=${this.apiKey}&s=${search}&page=${page}&type=${type}&y=${year}`);
     } catch (error) {
-      throw new Error('No connection');
+      throw new Error('imdb_error');
     }
     if (searchResponse.ok) {
       const searchAswer = await searchResponse.json();
@@ -41,16 +41,25 @@ export default class Model {
         return { data, total: searchAswer.totalResults };
       }
       throw new Error(searchAswer.Error);
+    } else if (searchResponse.status === 403 || searchResponse.status === 401) {
+      throw new Error('imdb_unauthorized');
     } else {
-      throw new Error(searchResponse.status);
+      throw new Error('imdb_error');
     }
   }
 
   async getInfo(id) {
     let imageOk = true;
     const answer = await fetch(`${this.url}?apikey=${this.apiKey}&i=${id}`);
+    if (!answer.ok) {
+      if (answer.status === 403 || answer.status === 401) {
+        throw new Error('imdb_unauthorized');
+      } else {
+        throw new Error('imdb_error');
+      }
+    }
     const result = await answer.json();
-    if (result.Poster === 'N/A') {
+    if (!result.Poster || result.Poster === 'N/A') {
       imageOk = false;
     } else {
       try {
@@ -72,10 +81,19 @@ export default class Model {
   }
 
   async getTranslation(str) {
-    const translation = await fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=${this.yandexKey}&text=${str}&lang=ru-en`)
-      .then((result) => result.json())
-      .then((result) => result.text[0]);
-    return translation;
+    const translation = await fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=${this.yandexKey}&text=${str}&lang=ru-en`);
+    if (!translation.ok) {
+      if (translation.status === 403 || translation.status === 401) {
+        throw new Error('yandex_unauthorized');
+      } else {
+        throw new Error('yandex_error');
+      }
+    }
+    const translationJson = await translation.json();
+    if (!translationJson.text || translationJson.text.length === 0) {
+      throw new Error('yandex_error');
+    }
+    return translationJson.text[0];
   }
 
   saveFavFilms() {

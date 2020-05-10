@@ -5,10 +5,15 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --watch",
     "build": "webpack --mode production",
-    "lint": "node node_modules/eslint/bin/eslint.js ./src"
+    "lint": "node node_modules/eslint/bin/eslint.js ./src",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "automock": false,
+    "setupFiles": ["./setupJest.js"]
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
@@ -21,6 +26,8 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.20.2",
     "html-webpack-plugin": "^4.2.1",
+    "jest": "^26.0.1",
+    "jest-fetch-mock": "^3.0.3",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",

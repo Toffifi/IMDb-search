@@ -3,11 +3,6 @@ export function shiftPressed(pressed, isMouse) {
     if (this.shift !== pressed) {
       this.shift = pressed;
       this.setState();
-      if (!pressed) {
-        if (this.alt) {
-          this.setLanguage();
-        }
-      }
     }
   } else {
     const elements = this.keys.filter((e) => e.id === '16_l' || e.id === '16_r');
@@ -30,9 +25,6 @@ export function altPressed(pressed, isMouse) {
   if (!isMouse) {
     if (this.alt !== pressed) {
       this.alt = pressed;
-      if (!pressed && this.shift) {
-        this.setLanguage();
-      }
     }
   } else {
     const elements = this.keys.filter((e) => e.id === '18_l' || e.id === '18_r');

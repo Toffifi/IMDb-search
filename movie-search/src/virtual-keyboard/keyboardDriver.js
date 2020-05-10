@@ -19,7 +19,7 @@ class keyboardDriver {
         if (key.func) {
           key.func(true);
         } else if (!event.ctrlKey) {
-          inputChar(key);
+          inputChar(null, event.key);
         }
       }
     });
