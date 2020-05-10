@@ -8,6 +8,26 @@ body{
         justify-content: space-around;
         background-color: #1f1f1f;
         color: white;
+        
+        button{
+            background: none;
+            border: none;
+            color: gray;
+            cursor: pointer;
+            transition: ease .3s;
+
+            &:focus{
+                outline: none;
+            }
+            &:hover{
+                color: white;
+                border-bottom: 3px solid #038487;
+            }
+        }
+        .active{
+            color: white;
+            border-bottom: 3px solid #038487;
+        }
     }
     main{
         height: 83%;

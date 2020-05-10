@@ -27,7 +27,15 @@ function clearInput() {
   });
 }
 
-export function createCrad(obj) {
+function favouriteBtn(callback) {
+  const favButton = document.querySelector('#fav-button');
+  favButton.addEventListener('click', () => {
+    callback();
+    favButton.classList.add('active');
+  });
+}
+
+export function createCrad(obj, setFavFilm, isFav) {
   const div = document.createElement('div');
   div.className = 'swiper-slide';
   div.id = obj.id;
@@ -37,16 +45,34 @@ export function createCrad(obj) {
   <div><p><i class="fas fa-star"></i> ${obj.imdbRating}</p> <button><i class="fas fa-heart"></i></button></div>`;
 
   const heart = div.querySelector('button');
-
-  heart.addEventListener('click', () => {
+  if (isFav) {
     heart.style.color = 'red';
+  }
+  heart.addEventListener('click', () => {
+    heart.style.color = setFavFilm(obj.id) ? 'red' : '';
   });
 
   return div;
 }
 
-export function initView(callback) {
-  bindEventHandler(callback);
+export function setInfo(message) {
+  const messageEl = document.querySelector('#p-message');
+  messageEl.innerHTML = message;
+}
+
+export function setError(error) {
+  const errorEl = document.querySelector('#p-error');
+  errorEl.innerHTML = error;
+}
+
+export function toggleActiveFavButton() {
+  const button = document.querySelector('header button');
+  button.classList.toggle('active');
+}
+
+export function initView(searchCallback, favCallback) {
+  bindEventHandler(searchCallback);
   openKeyboard();
   clearInput();
+  favouriteBtn(favCallback);
 }
