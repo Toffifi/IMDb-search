@@ -20,6 +20,7 @@ export default class Model {
         const answer = searchAswer.Search;
         for (let i = 0; i < answer.length; i += 1) {
           data.push({
+            id: answer[i].imdbID,
             title: answer[i].Title,
             year: answer[i].Year,
             image: answer[i].Poster,
@@ -30,7 +31,7 @@ export default class Model {
         await Promise.all(promises)
           .then((r) => data.forEach((e, i) => { e.imdbRating = r[i].imdbRating; }));
 
-        return data;
+        return { data, total: searchAswer.totalResults };
       }
       throw new Error(searchAswer.Error);
     } else {
