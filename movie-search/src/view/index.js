@@ -40,7 +40,7 @@ export function createCrad(obj, setFavFilm, isFav) {
   div.className = 'swiper-slide';
   div.id = obj.id;
   div.innerHTML = `
-  <a href = 'https://www.imdb.com/title/${obj.id}' target='_blank'>${obj.title}</a>
+  <div><a href = 'https://www.imdb.com/title/${obj.id}' target='_blank'>${obj.title}</a></div>
   <div class="image" style="background-image: url(${obj.image});"></div>
   <div><p><i class="fas fa-star"></i> ${obj.imdbRating}</p> <button><i class="fas fa-heart"></i></button></div>`;
 
@@ -70,9 +70,25 @@ export function toggleActiveFavButton() {
   button.classList.toggle('active');
 }
 
+function createYears() {
+  const select = document.querySelector('.dropdown-select');
+  for (let i = 2020; i >= 1896; i -= 1) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.innerHTML = i;
+    select.appendChild(option);
+  }
+}
+
+export function selectYear() {
+  const year = document.querySelector('.dropdown-select').value;
+  return year;
+}
+
 export function initView(searchCallback, favCallback) {
   bindEventHandler(searchCallback);
   openKeyboard();
   clearInput();
   favouriteBtn(favCallback);
+  createYears();
 }

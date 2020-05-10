@@ -48,8 +48,4 @@ export default class Slider {
   clearSlides() {
     this.swiper.removeAllSlides();
   }
-
-  // init() {
-
-  // }
 }

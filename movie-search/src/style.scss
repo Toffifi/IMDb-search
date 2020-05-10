@@ -8,6 +8,7 @@ body{
         justify-content: space-around;
         background-color: #1f1f1f;
         color: white;
+        align-items: center;
         
         button{
             background: none;
@@ -15,6 +16,7 @@ body{
             color: gray;
             cursor: pointer;
             transition: ease .3s;
+            padding: 15px;
 
             &:focus{
                 outline: none;
@@ -38,6 +40,9 @@ body{
 
         .search-section{
             padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
     footer{
@@ -70,11 +75,14 @@ body{
     display: flex;
     border: 1px solid #dfe1e5;
     box-shadow: none;
-    width: 60%;
-    border-radius: 24px;
+    width: 50%;
     height: 100%;
-    margin: 0 auto;    
+    margin-left: 5px;
     transition: 0.5s;
+    border: 1px solid;
+    border-color: white #f7f7f7 whitesmoke;
+    border-radius: 3px;
+
     &:hover{
         box-shadow: 0 1px 6px 0 rgba(66,133,244,1);
         border-color: rgba(223,225,229,0);
@@ -115,7 +123,6 @@ body{
                 padding: 0 8px;
                 color: #80868b;
                 font-size: 20px;
-                transition: 0.3s;
                 &:hover{
                     font-size: 21px;
                 }
@@ -141,11 +148,9 @@ body{
     background: none;
     color: #038487;
     font-size: 20px;
-    transition: 0.3s;
 
     &:hover{
         font-size: 22px;
-        width: 50px;
     }
 
     &:focus {
@@ -172,68 +177,161 @@ body{
     align-items: center;
 
     p{
-        margin: 0;
+        margin: 0 10px;
     }
 }
 
 .swiper-container {
     width: 100%;
-}
-.swiper-wrapper {
-    height: 95% !important;
-}
-.swiper-pagination{
-    bottom: 0px !important;
-}
-  .swiper-slide {
-    display: grid;
-    grid-template-rows: 10% 80% 10%;
-    background-color: #1f1f1f;
-    justify-content: center;
 
-    a{
-        color: white;
-        text-decoration: none;
-        align-self: center;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        padding: 0 10px;
-        transition: ease 0.3s;
+    .swiper-wrapper {
+        height: 95% !important;
 
-        &:hover{
-            color: #038487;
-        }
-    }
-
-    .image{
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-    }
-
-    div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .fa-star{
-            color: yellow;
-        }
-        button{
-            position: absolute;
-            bottom: 2%;
-            right: 2%;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: ease 0.3s;
-            
-            &:hover{
-                font-size: 22px;
+        .swiper-slide {
+            display: grid;
+            grid-template-rows: 10% 80% 10%;
+            grid-auto-columns: 100%;
+            background-color: #1f1f1f;
+            justify-content: center;
+        
+            a{
+                color: white;
+                text-decoration: none;
+                align-self: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                padding: 0 10px;
+                transition: ease 0.3s;
+                text-align: center;
+        
+                &:hover{
+                    color: #038487;
+                }
+            }
+        
+            .image{
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+        
+            div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        
+                .fa-star{
+                    color: yellow;
+                }
+                button{
+                    position: absolute;
+                    bottom: 2%;
+                    right: 2%;
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 20px;
+                    cursor: pointer;
+                    transition: ease 0.3s;
+                    
+                    &:hover{
+                        font-size: 22px;
+                    }
+                }
             }
         }
     }
-  }
+    .swiper-pagination{
+        bottom: 0px !important;
+    }
+}
+.dropdown {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    height: 28px;
+    width: 150px;
+    border: 1px solid;
+    border-color: white #f7f7f7 whitesmoke;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown:before, .dropdown:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 9px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 4px dashed;
+    border-color: #888888 transparent;
+    pointer-events: none;
+}
+
+.dropdown:before {
+    border-bottom-style: solid;
+    border-top: none;
+}
+
+.dropdown:after {
+    margin-top: 7px;
+    border-top-style: solid;
+    border-bottom: none;
+}
+
+.dropdown-select {
+    position: relative;
+    width: 130%;
+    margin: 0;
+    padding: 6px 8px 6px 10px;
+    height: 28px;
+    line-height: 14px;
+    font-size: 12px;
+    color: #62717a;
+    text-shadow: 0 1px white;
+    background: rgba(0, 0, 0, 0) !important;
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.dropdown-select:focus {
+    z-index: 3;
+    width: 100%;
+    color: #394349;
+    outline: none;
+}
+
+.dropdown-select > option {
+    margin: 3px;
+    padding: 6px 8px;
+    text-shadow: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #open-keyboard{
+        display: none;
+    }
+}
+@media (max-width: 530px) {
+    .search{
+        width: auto;
+    }
+    .dropdown {
+        width: 100px;
+    }
+}
+@media (max-width: 400px) {
+    .dropdown {
+        display: none;
+    }
+    h1{
+        font-size: 18px;
+    }
+}

@@ -12,6 +12,7 @@ export default class Controller {
     this.lastPage = 0;
     this.totalPages = 0;
     this.setFavFilm = this.setFavFilm.bind(this);
+    this.year = '';
   }
 
   async init() {
@@ -34,8 +35,11 @@ export default class Controller {
       return;
     }
     view.setError('');
+    if (this.showFavorite) {
+      view.toggleActiveFavButton();
+    }
     this.showFavorite = false;
-    view.toggleActiveFavButton();
+    this.year = view.selectYear();
     try {
       await this.checkLanguage(text);
       await this.createCards(0);
@@ -46,7 +50,7 @@ export default class Controller {
 
   async createCards(page) {
     const { data, total } = !this.showFavorite
-      ? await this.model.loadData(this.search, page + 1, 'movie', '')
+      ? await this.model.loadData(this.search, page + 1, 'movie', this.year)
       : await this.model.loadFavFilms(page);
     if (page === 0) {
       this.slider.clearSlides();
@@ -64,7 +68,11 @@ export default class Controller {
     if (text.match(/[а-яА-Я]/g)) {
       this.search = await this.model.getTranslation(text);
       this.translated = true;
-      view.setInfo(`Showing results for <span>"${this.search}"</span>`);
+      if (this.year.length > 0) {
+        view.setInfo(`Showing results for <i>"${this.search}"</i> ${this.year} year`);
+      } else {
+        view.setInfo(`Showing results for <i>"${this.search}"</i>`);
+      }
     } else {
       this.search = text;
       this.translated = false;

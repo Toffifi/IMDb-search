@@ -28,7 +28,7 @@ export default class Model {
   async loadData(search, page, type, year) {
     let searchResponse;
     try {
-      searchResponse = await fetch(`${this.url}?apikey=${this.apiKey}&s=${search}&page=${page}&type=${type}&year=${year}`);
+      searchResponse = await fetch(`${this.url}?apikey=${this.apiKey}&s=${search}&page=${page}&type=${type}&y=${year}`);
     } catch (error) {
       throw new Error('No connection');
     }
