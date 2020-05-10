@@ -10,18 +10,18 @@ body{
         color: white;
     }
     main{
-        height: 80%;
+        height: 83%;
         background-color: #141414;
         color: white;
         display: grid;
-        grid-template-rows: 10% 5% 85%;
+        grid-template-rows: 11% 8% 78%;
 
         .search-section{
-            padding: 15px;
+            padding: 10px;
         }
     }
     footer{
-        height: 10%;
+        height: 7%;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -50,10 +50,9 @@ body{
     display: flex;
     border: 1px solid #dfe1e5;
     box-shadow: none;
-    height: 39px;
-    width: 690px;
+    width: 60%;
     border-radius: 24px;
-    height: 44px;
+    height: 100%;
     margin: 0 auto;    
     transition: 0.5s;
     &:hover{
@@ -63,7 +62,7 @@ body{
     &>div{
         flex: 1;
         display: flex;
-        padding: 5px 4px 0 16px;
+        align-items: center;
         padding-left: 14px;
 
         input{
@@ -77,15 +76,12 @@ body{
             display: flex;
             flex: 100%;
             -webkit-tap-highlight-color: transparent;
-            height: 34px;
+            height: 100%;
             font-size: 16px;
         }
         div{
             display: flex;
-            flex: 0 0 auto;
-            margin-top: -5px;
-            align-items: stretch;
-            flex-direction: row;
+            height: 100%;
 
             button{
                 height: 100%;
@@ -117,7 +113,7 @@ body{
     }
 }
 .search-button{
-    height: 47px;
+    height: 100%;
     width: 44px;
     background: transparent;
     border: none;
@@ -150,26 +146,74 @@ body{
 .active-keyboard{
     height: 280px;
 }
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p{
+        margin: 0;
+    }
+}
 
 .swiper-container {
     width: 100%;
-  }
+}
+.swiper-wrapper {
+    height: 95% !important;
+}
+.swiper-pagination{
+    bottom: 0px !important;
+}
   .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    background-color: #1f1f1f;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+
+    a{
+        color: white;
+        text-decoration: none;
+        align-self: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 0 10px;
+        transition: ease 0.3s;
+
+        &:hover{
+            color: #038487;
+        }
+    }
+
+    .image{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .fa-star{
+            color: yellow;
+        }
+        button{
+            position: absolute;
+            bottom: 2%;
+            right: 2%;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: ease 0.3s;
+            
+            &:hover{
+                font-size: 22px;
+            }
+        }
+    }
   }

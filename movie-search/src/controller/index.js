@@ -38,7 +38,6 @@ export default class Controller {
     }
     data.forEach((el) => {
       const card = view.createCrad(el);
-      // console.log(card);
       this.slider.appendSlide(card);
     });
   }
@@ -58,7 +57,6 @@ export default class Controller {
     if (curentPage + 1 <= this.totalPages && this.lastPage < curentPage + 1) {
       this.lastPage = curentPage + 1;
       this.createCards(this.lastPage);
-      console.log('load page');
     }
   }
 }

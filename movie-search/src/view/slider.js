@@ -36,8 +36,6 @@ export default class Slider {
       on: {
         slideChange: () => {
           loadNextPage(Math.floor(this.swiper.activeIndex / 10));
-          console.log(this.swiper.activeIndex);
-          console.log(Math.floor(this.swiper.activeIndex / 10));
         },
       },
     });
