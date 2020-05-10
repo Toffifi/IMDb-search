@@ -3,23 +3,32 @@ import * as view from '../view';
 
 export default class Controller {
   constructor() {
-    this.search = '';
+    this.search = 'Star Wars';
     this.translated = false;
     this.model = new Model();
   }
 
-  init() {
+  async init() {
     view.initView(this.doTheSearch.bind(this));
+    try {
+      await this.createCards();
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   async doTheSearch() {
     try {
       await this.checkLanguage();
-      const data = await this.model.loadData(this.search, 1, 'movie', '');
-      console.log(data);
+      await this.createCards();
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+  async createCards() {
+    const data = await this.model.loadData(this.search, 1, 'movie', '');
+    console.log(data);
   }
 
   async checkLanguage() {

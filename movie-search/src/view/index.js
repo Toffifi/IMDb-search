@@ -18,7 +18,17 @@ function openKeyboard() {
   });
 }
 
+function clearInput() {
+  const clearButton = document.querySelector('#clear-button');
+  const input = document.querySelector('#search-input');
+
+  clearButton.addEventListener('click', () => {
+    input.value = '';
+  });
+}
+
 export function initView(callback) {
   bindEventHandler(callback);
   openKeyboard();
+  clearInput();
 }
