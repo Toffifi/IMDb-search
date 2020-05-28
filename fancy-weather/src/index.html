@@ -9,10 +9,81 @@
 </head>
 <body>
   <header>
-    
+    <div class="buttons-panel">
+      <button class="refresh"><i class="fas fa-sync-alt"></i></button>
+      <div class="dropdown">
+        <select name="one" class="dropdown-select">
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+          <option value="be">BE</option>
+        </select>
+      </div>
+      <div class="degrees">
+        <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+        <label for="toggle-on" class="btn">°C</label>
+        <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+        <label for="toggle-off" class="btn">°F</label>
+      </div>
+    </div>
+    <div class="search">
+      <div>
+          <input type="text" placeholder="Search..." autofocus id="search-input" autocomplete="off">
+          <div>
+              <button id="clear-button">
+                  <i class="fas fa-times"></i>
+              </button>
+              <span></span>
+              <button id="open-keyboard">
+                  <i class="fas fa-keyboard"></i>
+              </button>                        
+          </div>
+      </div>
+      <button class="search-button" id='search-button'>
+          <i class="fas fa-search"></i>
+      </button>
+    </div>
   </header>
   <main>
-
+    <section>
+      <div class="weather-today">
+        <p class="city">MINSK, BELARUS</p>
+        <p class="date">Mon 28 October 17:23:19</p>
+        <div>
+          <p>10°</p>
+          <img src="../assets/images/cloudy.png" alt="">
+          <div class="details">
+            <p>OVERCAST</p>
+            <p>FEELS LIKE: 7°</p>
+            <p>WIND: 2m/s</p>
+            <p>HUMIDITY: 83%</p>
+          </div>
+        </div>        
+      </div>
+      <div class="next-days">
+        <div>
+          <p>TUESDAY</p>
+          <p>7°</p>
+          <img src="../assets/images/cloudy.png" alt="">
+        </div>
+        <div>
+          <p>WEDNESDAY</p>
+          <p>6°</p>
+          <img src="../assets/images/cloudy.png" alt="">
+        </div>
+        <div>
+          <p>THURSDAY</p>
+          <p>3°</p>
+          <img src="../assets/images/cloudy.png" alt="">
+        </div>
+      </div>
+    </section>
+    <aside>
+        <div class="map"></div>
+        <div class="coordinates">
+          <p>Latitude: 53°54'</p>
+          <p>Longitude: 27°34'</p>
+        </div>
+    </aside>
   </main>
 </body>
 </html>
