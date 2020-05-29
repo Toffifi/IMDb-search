@@ -1,3 +1,5 @@
+import drowMap from './map';
+
 export default class Location {
   constructor(element) {
     this.api = 'https://ipinfo.io/json?';
@@ -16,6 +18,7 @@ export default class Location {
         const coord = json.loc.split(',');
         [this.latitude, this.longitude] = coord;
         this.drowCoordinates();
+        drowMap(this.longitude, this.latitude);
       } else {
         console.log('error location');
       }
@@ -30,6 +33,7 @@ export default class Location {
       this.latitude = String(position.coords.latitude);
       this.longitude = String(position.coords.longitude);
       this.drowCoordinates();
+      drowMap(this.longitude, this.latitude);
       console.log('success');
       console.log(`https://www.openstreetmap.org/#map=18/${this.latitude}/${this.longitude}`);
     };

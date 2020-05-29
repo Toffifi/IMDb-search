@@ -356,8 +356,7 @@ main{
 
     .map{
       width: 375px;
-      border: 1px solid black;
-      border-radius: 25px;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 78% 87%, 75% 100%, 61% 88%, 0 88%);
     }
     .coordinates{
       justify-self: right;
