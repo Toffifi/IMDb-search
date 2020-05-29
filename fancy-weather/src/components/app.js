@@ -1,5 +1,6 @@
 import Image from './randomBackground/images';
 import Spinner from './spinner/spinner';
+import Location from './location/getLocation';
 
 
 export default class App {
@@ -10,6 +11,7 @@ export default class App {
     this.language = 'en';
     this.spinner = new Spinner();
     this.bImage = new Image(document.querySelector('body'));
+    this.location = new Location(document.querySelector('.coordinates'));
 
     this.refreshButton = document.querySelector('.refresh');
   }
@@ -24,5 +26,7 @@ export default class App {
       await this.bImage.loadImage('winter', 'night');
       this.spinner.hide();
     });
+
+    await this.location.getLocationFromBrowser();
   }
 }

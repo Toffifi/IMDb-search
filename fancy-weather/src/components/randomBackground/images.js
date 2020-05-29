@@ -7,9 +7,9 @@ export default class Image {
     this.element = element;
   }
 
-  async getUrl(...args) {
-    const url = `${this.api}&query=${args.join(',')}&client_id=${this.apiKey}`;
-    console.log(args.join(','));
+  async getUrl(...theme) {
+    const url = `${this.api}&query=${theme.join(',')}&client_id=${this.apiKey}`;
+    console.log(`theme background: ${theme.join(', ')}`);
     const imageUrl = await fetch(url)
       .then((r) => r.json())
       .then((r) => (r ? r.urls.regular : undefined))
