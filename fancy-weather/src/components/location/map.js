@@ -2,6 +2,7 @@
 export default function drowMap(longitude, latitude) {
   document.querySelector('#map').innerHTML = '';
   mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmlmaSIsImEiOiJja2F0czZ3MmoweGFkMndvNWU0MnMybjA5In0.FYFD3Y2Y-60AnKzcbRrbuQ';
+  console.log(longitude, latitude);
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',

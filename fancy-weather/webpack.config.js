@@ -31,7 +31,6 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: './assets', to: path.resolve(__dirname, 'dist/assets') },
         { from: './src/components/translation/localization', to: path.resolve(__dirname, 'dist/localization') },
       ],
     }),

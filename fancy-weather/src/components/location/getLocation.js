@@ -57,6 +57,7 @@ export default class Location {
   }
 
   drowCoordinates() {
+    console.log(this.latitude, this.longitude);
     const latitude = this.latitude.split('.');
     const longitude = this.longitude.split('.');
     this.element.innerHTML = `<p><span data-i18n='lat'>${this.i18n.getTranslation('lat')}</span>: ${latitude[0]}°${latitude[1].slice(0, 2)}'</p><p><span data-i18n='lng'>${this.i18n.getTranslation('lng')}</span>: ${longitude[0]}°${longitude[1].slice(0, 2)}'</p>`;

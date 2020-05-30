@@ -1,10 +1,10 @@
 {
   "placeholder": "Enter city",
   "search": "search",
-  "feel": "Feels like:",
-  "wind": "Wind:",
+  "feel": "Feels like",
+  "wind": "Wind",
   "ms": "m/s",
-  "humidity": "Humidity:",
+  "humidity": "Humidity",
   "day": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
   "month": [
     "January", "February", "March", "April", "May", "June", "July", "August", "September",
@@ -12,7 +12,7 @@
   ],
   "lat": "Latitude",
   "lng": "Longitude",
-  "wether": {
+  "weather": {
     "200": "Thunderstorm with light rain",
     "201": "Thunderstorm with rain",
     "202": "Thunderstorm with heavy rain",
