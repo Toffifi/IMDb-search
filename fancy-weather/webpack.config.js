@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -17,10 +18,10 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
-            "style-loader",
-            "css-loader",
-            "sass-loader"
-        ]
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
@@ -28,5 +29,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
-  ]
+    new CopyPlugin({
+      patterns: [
+        { from: './assets', to: path.resolve(__dirname, 'dist/assets') },
+        { from: './src/components/translation/localization', to: path.resolve(__dirname, 'dist/localization') },
+      ],
+    }),
+  ],
 };

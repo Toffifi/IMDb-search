@@ -42,6 +42,7 @@ export default class Image {
   }
 
   changeBackground(imgBase64) {
-    this.element.style.backgroundImage = `url("${imgBase64}")`;
+    this.element.style.backgroundImage = `radial-gradient(ellipse, rgba(8,15,26,0.1), rgba(8,15,26,0.7)), url("${imgBase64}")`;
+    // `linear-gradient(to bottom, rgba(8,15,26,0.6), rgba(8,15,26,0)), url("${imgBase64}")`;
   }
 }

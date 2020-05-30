@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 export default function drowMap(longitude, latitude) {
-  document.querySelector('.map').innerHTML = '';
-  mapboxgl.accessToken = 'pk.eyJ1IjoiYmxhemFycXNvIiwiYSI6ImNrNDJraGI3dTAxYTMzbHFpZXA5ZTN0b3IifQ.MNNE20R0ZfNS1EuSVEcs1g';
+  document.querySelector('#map').innerHTML = '';
+  mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmlmaSIsImEiOiJja2F0czZ3MmoweGFkMndvNWU0MnMybjA5In0.FYFD3Y2Y-60AnKzcbRrbuQ';
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
