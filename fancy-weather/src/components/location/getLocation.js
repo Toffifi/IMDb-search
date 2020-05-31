@@ -1,7 +1,6 @@
 import './map.scss';
 
 import drowMap from './map';
-// import Modal from '../modal';
 import { urlBuilder } from '../utils';
 
 export default class Location {

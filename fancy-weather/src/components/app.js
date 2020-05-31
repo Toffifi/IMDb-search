@@ -22,6 +22,7 @@ export default class App {
     this.refreshButton = document.querySelector('.refresh');
     this.selectLanguage = document.querySelector('.dropdown-select');
     this.unitChangeButtons = document.querySelectorAll('.toggle');
+    this.playButton = document.querySelector('.play');
 
     this.i18n = new I18n();
     this.clock = new Clock(document.querySelector('#clock'), this.i18n);
@@ -49,6 +50,8 @@ export default class App {
       this.input,
       this.doTheSearch.bind(this),
       this.speechButton,
+      this.sayIt.bind(this),
+      this.playButton,
     );
   }
 
@@ -93,10 +96,14 @@ export default class App {
     this.clearInput.addEventListener('click', () => {
       this.input.value = '';
     });
+
     this.speechButton.addEventListener('click', () => {
       this.speech.letsSpeech();
     });
 
+    this.playButton.addEventListener('click', () => {
+      this.sayIt();
+    });
 
     this.spinner.show();
     await this.i18n.getLocalizationFiles(this.language);
@@ -135,5 +142,20 @@ export default class App {
     await this.location.getLocationFromInput();
     this.spinner.hide();
     this.input.value = '';
+  }
+
+  sayIt() {
+    if (this.weather.readeableForecast) {
+      let str = `${this.location.country} ${this.location.city}: `;
+      this.weather.readeableForecast.forEach((e) => {
+        if (e.tr) {
+          str += this.i18n.getTranslation(e.tr);
+        }
+        str += e.str;
+      });
+      if (str.length > 0) {
+        this.speech.read(str);
+      }
+    }
   }
 }

@@ -112,7 +112,6 @@ export default class Weather {
         <p><span data-i18n='wind'>${this.i18n.getTranslation('wind')}</span>: ${result.today.wind}<span data-i18n='ms' style="text-transform: lowercase">${this.i18n.getTranslation('ms')}</span></p>
         <p><span data-i18n='humidity'>${this.i18n.getTranslation('humidity')}</span>: ${result.today.humidity}%</p>
       </div>`;
-
     let inner = '';
     result.otherDays.forEach((e) => {
       inner += `
@@ -124,6 +123,28 @@ export default class Weather {
       `;
     });
     this.nextDaysContainer.innerHTML = inner;
+
+    this.readeableForecast = [
+      {
+        str: `${result.today.temp}°,   `,
+      },
+      {
+        tr: `weather.${result.today.code}`,
+        str: ', ',
+      },
+      {
+        tr: 'feel',
+        str: ` ${result.today.feelsLike}°,   `,
+      },
+      {
+        tr: 'wind',
+        str: ` ${result.today.wind} м с,  `,
+      },
+      {
+        tr: 'humidity',
+        str: ` ${result.today.humidity}%, `,
+      },
+    ];
   }
 
   getSeason(curDate) {
