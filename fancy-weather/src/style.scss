@@ -7,6 +7,10 @@ body{
   height: 95vh;
   overflow: hidden;
   background-size: cover;
+
+  @media (max-width: 1200px) {
+    height: 98vh;
+  }
 }
 header{
   height: 6vh;
@@ -14,11 +18,29 @@ header{
   margin: 38px;
   justify-content: space-between;
   padding: 0 50px;
+  @media (max-width: 1000px) {
+    padding: 0;
+  }
+  @media (max-width: 620px) {
+    flex-direction: column-reverse;
+    height: 11vh;
+    margin: 25px;
+  }
 }
 .buttons-panel {
   display: flex;
   width: 25%;
   justify-content: space-around;
+  max-height: 50px;
+  @media (max-width: 1200px) {
+    width: 35%;
+  }
+  @media (max-width: 800px) {
+    width: 50%;
+  }
+  @media (max-width: 620px) {
+    width: 100%;
+  }
 
   .refresh{
     padding: 8px 12px;
@@ -187,6 +209,12 @@ header{
   border-color: white #f7f7f7 whitesmoke;
   border-radius: 3px;
   max-height: 50px;
+  @media (max-width: 900px) {
+    width: auto;
+  }
+  @media (max-width: 620px) {
+    margin-bottom: 10px;
+  }
 
   &:hover{
       box-shadow: 0 1px 6px 0 rgba(66,133,244,1);
@@ -211,6 +239,9 @@ header{
           -webkit-tap-highlight-color: transparent;
           height: 100%;
           font-size: 16px;
+          @media (max-width: 390px) {
+            width: 100%;
+          }
       }
       div{
           display: flex;
@@ -268,6 +299,12 @@ main{
   grid-template-columns: 67% 33%;
   justify-content: space-between;
   height: 85%;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: auto;
+    grid-template-rows: 67% 33%;
+    justify-content: center;
+  }
 }
 
 .upper{

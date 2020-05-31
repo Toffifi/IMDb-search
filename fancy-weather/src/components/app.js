@@ -10,7 +10,7 @@ import initKeyboard from './virtual-keyboard';
 export default class App {
   constructor() {
     this.unit = localStorage.getItem('unit') !== null ? JSON.parse(localStorage.getItem('unit')) : true; // true = C, false = F
-    this.language = localStorage.getItem('lang') || 'en';
+    this.language = localStorage.getItem('langApp') || 'en';
 
     this.input = document.querySelector('#search-input');
     this.searchButton = document.querySelector('#search-button');
@@ -55,7 +55,7 @@ export default class App {
       this.language = this.selectLanguage.value;
       this.location.language = this.language;
       this.location.drowPlaceName();
-      localStorage.setItem('lang', this.language);
+      localStorage.setItem('langApp', this.language);
       this.i18n.changeLang(this.language);
     });
 

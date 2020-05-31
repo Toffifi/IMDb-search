@@ -10,7 +10,7 @@ export default class Location {
     this.keyIpinfo = '0c1bd19d46aa74';
 
     this.urlOpencage = 'https://api.opencagedata.com/geocode/v1/json';
-    this.apiKeyOpencage = 'c6b6da0f80f24b299e08ee1075f81aa5';
+    this.apiKeyOpencage = '99470397f77f49468bcd13c386a1bd59'; // 99470397f77f49468bcd13c386a1bd59, c6b6da0f80f24b299e08ee1075f81aa5
 
     this.latitude = null;
     this.longitude = null;
@@ -121,7 +121,7 @@ export default class Location {
     const data = await this.getOpencagedata(`${this.latitude}, ${this.longitude}`);
     console.log(data);
     this.city = data[0].components.city ? `${data[0].components.city.toUpperCase()}, ` : '';
-    this.country = data[0].components.country;
+    this.country = data[0].components.country ? `${data[0].components.country.toUpperCase()}` : '';
     this.placeElement.innerHTML = `${this.city}${this.country.toUpperCase()}`;
   }
 }
