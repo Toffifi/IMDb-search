@@ -1,0 +1,15 @@
+ aside{
+  display: grid;
+  grid-template-rows: 59% 23%;
+  justify-content: center;
+  align-content: flex-end;
+
+  .map{
+    width: 375px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 78% 87%, 75% 100%, 61% 88%, 0 88%);
+  }
+  .coordinates{
+    justify-self: right;
+    align-self: center;
+  }
+}

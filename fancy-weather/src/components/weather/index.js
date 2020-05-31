@@ -1,4 +1,5 @@
 import './style.css';
+import './weather.scss';
 
 import { urlBuilder, getLocalTime } from '../utils';
 import svg from './svgIcons';

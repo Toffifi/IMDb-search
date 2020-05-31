@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-export default function drowMap(longitude, latitude) {
+export default function drowMap(longitude, latitude, lang) {
   document.querySelector('#map').innerHTML = '';
   mapboxgl.accessToken = 'pk.eyJ1IjoidG9mZmlmaSIsImEiOiJja2F0czZ3MmoweGFkMndvNWU0MnMybjA5In0.FYFD3Y2Y-60AnKzcbRrbuQ';
   const map = new mapboxgl.Map({
@@ -11,7 +11,7 @@ export default function drowMap(longitude, latitude) {
   map.on('load', () => {
     map.setLayoutProperty('country-label', 'text-field', [
       'format',
-      ['get', 'name_ru'],
+      ['get', `name_${lang === 'en' ? 'en' : 'ru'}`],
       { 'font-scale': 1.2 },
     ]);
   });

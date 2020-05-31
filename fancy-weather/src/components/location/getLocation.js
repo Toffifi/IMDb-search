@@ -1,3 +1,5 @@
+import './map.scss';
+
 import drowMap from './map';
 // import Modal from '../modal';
 import { urlBuilder } from '../utils';
@@ -93,7 +95,7 @@ export default class Location {
   async handleCoordinates() {
     await this.drowPlaceName();
     this.drowCoordinates();
-    drowMap(this.longitude, this.latitude);
+    drowMap(this.longitude, this.latitude, this.language);
     await this.loadWeather(this.latitude, this.longitude);
   }
 
@@ -117,8 +119,9 @@ export default class Location {
 
   async drowPlaceName() {
     const data = await this.getOpencagedata(`${this.latitude}, ${this.longitude}`);
-    this.city = data[0].components.city;
+    console.log(data);
+    this.city = data[0].components.city ? `${data[0].components.city.toUpperCase()}, ` : '';
     this.country = data[0].components.country;
-    this.placeElement.innerHTML = `${this.city.toUpperCase()}, ${this.country.toUpperCase()}`;
+    this.placeElement.innerHTML = `${this.city}${this.country.toUpperCase()}`;
   }
 }

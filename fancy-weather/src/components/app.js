@@ -9,14 +9,18 @@ import initKeyboard from './virtual-keyboard';
 
 export default class App {
   constructor() {
-    this.imageURL = 'https://images.unsplash.com/photo-1513786704796-b35842f0dca6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzODEyNH0';
     this.unit = localStorage.getItem('unit') !== null ? JSON.parse(localStorage.getItem('unit')) : true; // true = C, false = F
     this.language = localStorage.getItem('lang') || 'en';
+
+    this.input = document.querySelector('#search-input');
+    this.searchButton = document.querySelector('#search-button');
+    this.refreshButton = document.querySelector('.refresh');
+    this.selectLanguage = document.querySelector('.dropdown-select');
+    this.unitChangeButtons = document.querySelectorAll('.toggle');
+
     this.i18n = new I18n();
     this.clock = new Clock(document.querySelector('#clock'), this.i18n);
     this.spinner = new Spinner();
-    this.input = document.querySelector('#search-input');
-
     this.bImage = new Image(document.querySelector('body'));
     this.location = new Location(
       this.input,
@@ -26,31 +30,17 @@ export default class App {
       this.loadWeather.bind(this),
       this.language,
     );
-    this.weather = new Weather(document.querySelector('#today'), document.querySelector('#next-days'), this.i18n);
-
-    this.searchButton = document.querySelector('#search-button');
-    this.refreshButton = document.querySelector('.refresh');
-    this.selectLanguage = document.querySelector('.dropdown-select');
-    this.unitChangeButtons = document.querySelectorAll('.toggle');
-  }
-
-  connectKeyboard() {
-    initKeyboard(this.input, document.querySelector('#keyboard'), this.doTheSearch.bind(this));
-    const keyboardButton = document.querySelector('#open-keyboard');
-    const keyboardContainer = document.querySelector('.keyboard-container');
-    keyboardContainer.addEventListener('click', () => {
-      this.input.focus();
-    });
-    keyboardButton.addEventListener('click', () => {
-      keyboardContainer.classList.toggle('active-keyboard');
-      keyboardButton.classList.toggle('active');
-      this.input.focus();
-    });
+    this.weather = new Weather(
+      document.querySelector('#today'),
+      document.querySelector('#next-days'),
+      this.i18n,
+    );
   }
 
   async initialize() {
     this.selectLanguage.value = this.language;
     this.connectKeyboard();
+
     this.refreshButton.addEventListener('click', async () => {
       this.spinner.show();
       await this.bImage.loadImage(
@@ -101,6 +91,20 @@ export default class App {
       this.weather.partOfTheDay,
     );
     this.spinner.hide();
+  }
+
+  connectKeyboard() {
+    initKeyboard(this.input, document.querySelector('#keyboard'), this.doTheSearch.bind(this));
+    const keyboardButton = document.querySelector('#open-keyboard');
+    const keyboardContainer = document.querySelector('.keyboard-container');
+    keyboardContainer.addEventListener('click', () => {
+      this.input.focus();
+    });
+    keyboardButton.addEventListener('click', () => {
+      keyboardContainer.classList.toggle('active-keyboard');
+      keyboardButton.classList.toggle('active');
+      this.input.focus();
+    });
   }
 
   async doTheSearch() {
