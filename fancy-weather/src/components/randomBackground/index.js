@@ -1,20 +1,43 @@
+
+import { urlBuilder } from '../utils';
+
 export default class Image {
   constructor(element) {
-    this.api = 'https://api.unsplash.com/photos/random?orientation=landscape';
-    this.apiKey = '5QSGeho0iyo6Vlso8GbMJtnfumF5KZgDr3z8jJFCbLg'; // yMZSTnU1T_bzoqS7FXRVJLLpVqtAa7f0aFRzj0azZvw 5QSGeho0iyo6Vlso8GbMJtnfumF5KZgDr3z8jJFCbLg
+    this.api = 'https://api.unsplash.com/photos/random';
+    this.apiKey = ['5QSGeho0iyo6Vlso8GbMJtnfumF5KZgDr3z8jJFCbLg', 'yMZSTnU1T_bzoqS7FXRVJLLpVqtAa7f0aFRzj0azZvw'];
+    this.apiTrys = 0;
     this.imageReader = new FileReader();
     this.defaultImageUrl = 'https://images.unsplash.com/photo-1513786704796-b35842f0dca6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzODEyNH0';
     this.element = element;
   }
 
   async getUrl(...theme) {
-    const url = `${this.api}&query=${theme.join(',')}&client_id=${this.apiKey}`;
-    console.log(`theme background: ${theme.join(', ')}`);
-    const imageUrl = await fetch(url)
-      .then((r) => r.json())
-      .then((r) => (r ? r.urls.regular : undefined))
-      .catch(() => undefined);
-    return imageUrl;
+    const params = {
+      client_id: this.apiKey[this.apiTrys],
+      orientation: 'landscape',
+      query: theme.join(','),
+    };
+    const url = urlBuilder(this.api, params);
+    try {
+      const response = await fetch(url);
+      if (response.status === 200) {
+        console.log(`theme background: ${params.query}`);
+        this.apiTrys = 0;
+        return response.json()
+          .then((r) => (r ? r.urls.regular : undefined))
+          .catch(() => undefined);
+      }
+      if (response.status === 401 || response.status === 402 || response.status === 403) {
+        this.apiTrys += 1;
+        if (this.apiTrys <= this.apiKey.length) {
+          const imageUrl = await this.getUrl(...theme);
+          return imageUrl;
+        }
+      }
+    } finally {
+      this.apiTrys = 0;
+    }
+    return undefined;
   }
 
   async getImage(url) {

@@ -51,5 +51,13 @@
     "804": "Overcast clouds",
     "900": "Unknown Precipitation"
   },
-  "error": "There is no such place"
+  "error": "Error",
+  "errors": {
+    "noResults": "No matches were found for \"{0}\"",
+    "badKey": "Problem with {0} access Key. Contact the site author to update the API key",
+    "location": "Error while retrieving location by coordinates. Try to refresh this page or try later",
+    "locationIp": "Error while retrieving location by IP. Try to refresh this page or allow geolocation",
+    "map": "Error while loading a map. Try to refresh this page or try later",
+    "forecast": "Error while loading a weather forecast. Try to refresh this page or try later"
+  }
 }

@@ -5,6 +5,9 @@ import I18n from './translation';
 import Weather from './weather';
 import Clock from './clock';
 import initKeyboard from './virtual-keyboard';
+import ErrorHandler from './errorHandler';
+import Modal from './modal';
+import Speech from './speech';
 
 
 export default class App {
@@ -14,6 +17,8 @@ export default class App {
 
     this.input = document.querySelector('#search-input');
     this.searchButton = document.querySelector('#search-button');
+    this.clearInput = document.querySelector('#clear-button');
+    this.speechButton = document.querySelector('#speech');
     this.refreshButton = document.querySelector('.refresh');
     this.selectLanguage = document.querySelector('.dropdown-select');
     this.unitChangeButtons = document.querySelectorAll('.toggle');
@@ -22,6 +27,8 @@ export default class App {
     this.clock = new Clock(document.querySelector('#clock'), this.i18n);
     this.spinner = new Spinner();
     this.bImage = new Image(document.querySelector('body'));
+    this.modal = new Modal(this.i18n);
+    this.errorHandler = new ErrorHandler(this.modal);
     this.location = new Location(
       this.input,
       document.querySelector('.coordinates'),
@@ -29,11 +36,19 @@ export default class App {
       this.i18n,
       this.loadWeather.bind(this),
       this.language,
+      this.errorHandler,
     );
     this.weather = new Weather(
       document.querySelector('#today'),
       document.querySelector('#next-days'),
       this.i18n,
+      this.errorHandler,
+    );
+    this.speech = new Speech(
+      this.language,
+      this.input,
+      this.doTheSearch.bind(this),
+      this.speechButton,
     );
   }
 
@@ -54,6 +69,7 @@ export default class App {
     this.selectLanguage.addEventListener('change', () => {
       this.language = this.selectLanguage.value;
       this.location.language = this.language;
+      this.speech.lang = this.language;
       this.location.drowPlaceName();
       localStorage.setItem('langApp', this.language);
       this.i18n.changeLang(this.language);
@@ -72,6 +88,13 @@ export default class App {
 
     this.searchButton.addEventListener('click', async () => {
       this.doTheSearch();
+    });
+
+    this.clearInput.addEventListener('click', () => {
+      this.input.value = '';
+    });
+    this.speechButton.addEventListener('click', () => {
+      this.speech.letsSpeech();
     });
 
 
