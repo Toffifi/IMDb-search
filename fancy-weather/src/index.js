@@ -3,5 +3,9 @@ import './style.scss';
 
 import App from './components/app';
 
-const app = new App();
-app.initialize();
+function init() {
+  const app = new App();
+  app.initialize();
+}
+
+init();

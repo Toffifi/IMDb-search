@@ -265,7 +265,7 @@ header{
 
 main{
   display: grid !important;
-  grid-template-columns: 59% 41%;
+  grid-template-columns: 62% 38%;
   justify-content: space-between;
   height: 85%;
 
@@ -298,7 +298,7 @@ main{
       &>div{
         height: 100%;
         display: grid;
-        grid-template: 1fr 1fr/60% 40%;
+        grid-template: 1fr 1fr/60% 43%;
         justify-content: center;
         align-items: center;
 
@@ -378,4 +378,25 @@ main{
   z-index: 9;
   top: 0;
   left: 0;
+}
+
+.keyboard-container{
+  position: fixed;
+  height: 0;
+  z-index: 99;
+  bottom: 0px;
+  overflow: hidden;
+  transition: ease-out 0.5s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.active-keyboard{
+  height: 280px;
+}
+
+@media (max-width: 768px) {
+  #open-keyboard{
+      display: none;
+  }
 }

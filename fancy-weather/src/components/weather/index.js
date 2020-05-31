@@ -11,6 +11,8 @@ export default class Weather {
     this.nextDaysContainer = nextDaysContainer;
     this.i18n = i18n;
     this.offset = null;
+    this.season = null;
+    this.partOfTheDay = null;
   }
 
   async getWeather(latitude, longitude, units) {
@@ -25,6 +27,8 @@ export default class Weather {
     const json = await responce.json();
     this.offset = json.city.timezone;
     const curDate = getLocalTime(this.offset);
+    this.getSeason(curDate);
+    this.getPartOfTheDay(curDate);
     const result = {
       today: {
         temp: Math.round(json.list[0].main.temp),
@@ -37,7 +41,7 @@ export default class Weather {
     };
 
     json.list.forEach((e) => {
-      const date = getLocalTime(this.offset, e.dt * 1000);
+      const date = new Date(e.dt * 1000);
       const hour = date.getHours();
       if (date.getDate() !== curDate.getDate() && [9, 15, 21].indexOf(hour) !== -1) {
         let dayObj = result.otherDays.find((s) => s.dayOfWeek === date.getDay());
@@ -93,5 +97,31 @@ export default class Weather {
       `;
     });
     this.nextDaysContainer.innerHTML = inner;
+  }
+
+  getSeason(curDate) {
+    const month = curDate.getMonth();
+    if (month <= 1 && month >= 11) {
+      this.season = 'winter';
+    } else if (month >= 2 && month <= 4) {
+      this.season = 'spring';
+    } else if (month >= 5 && month <= 7) {
+      this.season = 'summer';
+    } else {
+      this.season = 'autumn';
+    }
+  }
+
+  getPartOfTheDay(curDate) {
+    const hour = curDate.getHours();
+    if (hour < 6) {
+      this.partOfTheDay = 'night';
+    } else if (hour >= 6 && hour <= 11) {
+      this.partOfTheDay = 'morning';
+    } else if (hour >= 12 && hour <= 17) {
+      this.partOfTheDay = 'afternoon';
+    } else if (hour >= 18) {
+      this.partOfTheDay = 'evening';
+    }
   }
 }

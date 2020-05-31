@@ -4,40 +4,71 @@ import Location from './location/getLocation';
 import I18n from './translation';
 import Weather from './weather';
 import Clock from './clock';
+import initKeyboard from './virtual-keyboard';
 
 
 export default class App {
   constructor() {
     this.imageURL = 'https://images.unsplash.com/photo-1513786704796-b35842f0dca6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzODEyNH0';
     this.unit = localStorage.getItem('unit') !== null ? JSON.parse(localStorage.getItem('unit')) : true; // true = C, false = F
-    this.city = 'Oslo';
     this.language = localStorage.getItem('lang') || 'en';
     this.i18n = new I18n();
     this.clock = new Clock(document.querySelector('#clock'), this.i18n);
     this.spinner = new Spinner();
+    this.input = document.querySelector('#search-input');
+
     this.bImage = new Image(document.querySelector('body'));
-    this.location = new Location(document.querySelector('.coordinates'), this.i18n, this.loadWeather.bind(this));
-    this.i18n.getLocalizationFiles(this.language);
+    this.location = new Location(
+      this.input,
+      document.querySelector('.coordinates'),
+      document.querySelector('.place'),
+      this.i18n,
+      this.loadWeather.bind(this),
+      this.language,
+    );
     this.weather = new Weather(document.querySelector('#today'), document.querySelector('#next-days'), this.i18n);
 
+    this.searchButton = document.querySelector('#search-button');
     this.refreshButton = document.querySelector('.refresh');
     this.selectLanguage = document.querySelector('.dropdown-select');
     this.unitChangeButtons = document.querySelectorAll('.toggle');
   }
 
+  connectKeyboard() {
+    initKeyboard(this.input, document.querySelector('#keyboard'), this.doTheSearch.bind(this));
+    const keyboardButton = document.querySelector('#open-keyboard');
+    const keyboardContainer = document.querySelector('.keyboard-container');
+    keyboardContainer.addEventListener('click', () => {
+      this.input.focus();
+    });
+    keyboardButton.addEventListener('click', () => {
+      keyboardContainer.classList.toggle('active-keyboard');
+      keyboardButton.classList.toggle('active');
+      this.input.focus();
+    });
+  }
+
   async initialize() {
     this.selectLanguage.value = this.language;
+    this.connectKeyboard();
     this.refreshButton.addEventListener('click', async () => {
       this.spinner.show();
-      await this.bImage.loadImage('Belarus', 'winter', 'afternoon');
+      await this.bImage.loadImage(
+        this.location.country,
+        this.weather.season,
+        this.weather.partOfTheDay,
+      );
       this.spinner.hide();
     });
 
     this.selectLanguage.addEventListener('change', () => {
       this.language = this.selectLanguage.value;
+      this.location.language = this.language;
+      this.location.drowPlaceName();
       localStorage.setItem('lang', this.language);
       this.i18n.changeLang(this.language);
     });
+
     this.unitChangeButtons.forEach((e) => {
       if (JSON.parse(e.value) === this.unit) {
         e.checked = JSON.parse(e.value) === this.unit;
@@ -49,9 +80,13 @@ export default class App {
       });
     });
 
+    this.searchButton.addEventListener('click', async () => {
+      this.doTheSearch();
+    });
+
 
     this.spinner.show();
-    await this.bImage.loadImage();
+    await this.i18n.getLocalizationFiles(this.language);
     await this.location.getLocationFromBrowser();
     this.spinner.hide();
   }
@@ -60,6 +95,18 @@ export default class App {
     this.spinner.show();
     await this.weather.getWeather(lat, lon, this.unit);
     this.clock.offset = this.weather.offset;
+    await this.bImage.loadImage(
+      this.location.country,
+      this.weather.season,
+      this.weather.partOfTheDay,
+    );
     this.spinner.hide();
+  }
+
+  async doTheSearch() {
+    this.spinner.show();
+    await this.location.getLocationFromInput();
+    this.spinner.hide();
+    this.input.value = '';
   }
 }
