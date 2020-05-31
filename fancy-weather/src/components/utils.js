@@ -7,6 +7,10 @@ export function urlBuilder(apiUrl, params) {
   return url;
 }
 
-export function getLocalTime(offset) {
-  return new Date(Date.now() + (offset - (new Date().getTimezoneOffset() * 60 * -1)) * 1000);
+export function getLocalTime(offset, timeSpan) {
+  const ts = timeSpan || Date.now();
+  if (offset !== null && offset !== undefined) {
+    return new Date(ts + (offset - (new Date().getTimezoneOffset() * 60 * -1)) * 1000);
+  }
+  return new Date();
 }

@@ -1,3 +1,5 @@
+import './style.css';
+
 import { urlBuilder, getLocalTime } from '../utils';
 import svg from './svgIcons';
 
@@ -8,20 +10,21 @@ export default class Weather {
     this.todayContainer = todayContainer;
     this.nextDaysContainer = nextDaysContainer;
     this.i18n = i18n;
+    this.offset = null;
   }
 
   async getWeather(latitude, longitude, units) {
     const params = {
       APPID: this.apiKey,
-      units: units ? 'metric' : 'imperial',
+      units: (units ? 'metric' : 'imperial'),
       lat: latitude,
       lon: longitude,
     };
     const url = urlBuilder(this.api, params);
     const responce = await fetch(url);
     const json = await responce.json();
-    const curDate = getLocalTime(json.city.timezone);
-
+    this.offset = json.city.timezone;
+    const curDate = getLocalTime(this.offset);
     const result = {
       today: {
         temp: Math.round(json.list[0].main.temp),
@@ -34,7 +37,7 @@ export default class Weather {
     };
 
     json.list.forEach((e) => {
-      const date = new Date(e.dt * 1000);
+      const date = getLocalTime(this.offset, e.dt * 1000);
       const hour = date.getHours();
       if (date.getDate() !== curDate.getDate() && [9, 15, 21].indexOf(hour) !== -1) {
         let dayObj = result.otherDays.find((s) => s.dayOfWeek === date.getDay());
@@ -68,6 +71,7 @@ export default class Weather {
   }
 
   drowWeather(result) {
+    console.log(result);
     this.todayContainer.innerHTML = `
       <p>${result.today.temp}°</p>
       ${svg[result.today.code]}

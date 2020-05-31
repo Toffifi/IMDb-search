@@ -24,9 +24,9 @@
         </select>
       </div>
       <div class="degrees">
-        <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+        <input id="toggle-on" class="toggle toggle-left" name="toggle" value="true" type="radio" checked>
         <label for="toggle-on" class="btn">°C</label>
-        <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+        <input id="toggle-off" class="toggle toggle-right" name="toggle" value="false" type="radio">
         <label for="toggle-off" class="btn">°F</label>
       </div>
     </div>
@@ -52,9 +52,8 @@
     <section>
       <div class="weather-today">
         <p class="city">MINSK, BELARUS</p>
-        <p class="date"><span data-i18n='day.0'></span> 28 <span data-i18n='month.9'></span> 17:23:19</p>
+        <p class="date" id="clock"></p>
         <div id="today">
-          </div>
         </div>
       </div>
       <div class="next-days upper" id="next-days">

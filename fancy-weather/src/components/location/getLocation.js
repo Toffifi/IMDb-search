@@ -1,13 +1,15 @@
 import drowMap from './map';
+import Modal from '../modal';
 
 export default class Location {
-  constructor(element, i18n) {
+  constructor(element, i18n, loadWeather) {
     this.api = 'https://ipinfo.io/json?';
     this.key = '0c1bd19d46aa74';
     this.latitude = null;
     this.longitude = null;
     this.element = element;
     this.i18n = i18n;
+    this.loadWeather = loadWeather;
   }
 
   async getLocationFromIP() {
@@ -18,24 +20,24 @@ export default class Location {
         const json = await response.json();
         const coord = json.loc.split(',');
         [this.latitude, this.longitude] = coord;
-        this.drowCoordinates();
-        drowMap(this.longitude, this.latitude);
+        await this.handleCoordinates();
       } else {
+        new Modal().drow('Error', 'error location(разрешіте геопозіцію ілі перезагрузіте страніцу)');
         console.log('error location');
       }
     } catch (error) {
+      new Modal().drow('Error', 'error location catch(разрешіте геопозіцію ілі перезагрузіте страніцу)');
       console.log('error location catch');
     }
   }
 
   async getLocationFromBrowser() {
     const promise = new Promise((resolve) => {
-      const success = (position, timerID) => {
+      const success = async (position, timerID) => {
         clearTimeout(timerID);
         this.latitude = String(position.coords.latitude);
         this.longitude = String(position.coords.longitude);
-        this.drowCoordinates();
-        drowMap(this.longitude, this.latitude);
+        await this.handleCoordinates();
         console.log('success');
         resolve();
       };
@@ -61,5 +63,11 @@ export default class Location {
     const latitude = this.latitude.split('.');
     const longitude = this.longitude.split('.');
     this.element.innerHTML = `<p><span data-i18n='lat'>${this.i18n.getTranslation('lat')}</span>: ${latitude[0]}°${latitude[1].slice(0, 2)}'</p><p><span data-i18n='lng'>${this.i18n.getTranslation('lng')}</span>: ${longitude[0]}°${longitude[1].slice(0, 2)}'</p>`;
+  }
+
+  async handleCoordinates() {
+    this.drowCoordinates();
+    drowMap(this.longitude, this.latitude);
+    await this.loadWeather(this.latitude, this.longitude);
   }
 }

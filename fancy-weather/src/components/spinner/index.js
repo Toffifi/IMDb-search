@@ -1,3 +1,5 @@
+import './spinner.scss';
+
 export default class Spinner {
   constructor() {
     this.blur = document.querySelector('.blur');
